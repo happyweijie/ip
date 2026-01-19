@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Jimjam {
     private static final String LOGO = "--jimjam";
     private static final String LINE = "_".repeat(60);
@@ -5,6 +7,20 @@ public class Jimjam {
     public static void main(String[] args) {
         printGreeting();
 
+        // take user input
+        Scanner scanner= new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            String prompt = scanner.nextLine();
+
+            if (prompt.equalsIgnoreCase("bye")) {
+                isRunning = false;
+            } else {
+                printMessage(prompt);
+            }
+        }
+
+        scanner.close();
         printGoodbye();
     }
 
