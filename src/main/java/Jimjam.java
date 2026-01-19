@@ -1,5 +1,5 @@
-public class Henry {
-    private static final String LOGO = "--henry";
+public class Jimjam {
+    private static final String LOGO = "--jimjam";
     private static final String LINE = "_".repeat(60);
 
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Henry {
     public static void printGreeting() {
         System.out.println(LINE);
 
-        System.out.println("Hello from Henry!");
+        System.out.println("Hello from Jimjam!");
         System.out.println("What can I do for you?");
         System.out.println(LOGO);
 
