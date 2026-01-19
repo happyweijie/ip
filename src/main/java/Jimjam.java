@@ -9,21 +9,21 @@ public class Jimjam {
     }
 
     public static void printGreeting() {
-        System.out.println(LINE);
-
-        System.out.println("Hello from Jimjam!");
-        System.out.println("What can I do for you?");
-        System.out.println(LOGO);
-
-        System.out.println(LINE);
+        String greeting = "Hello from Jimjam!\n" +
+                "What can I do for you?";
+        printMessage(greeting);
     }
 
     public static void printGoodbye() {
+        printMessage("Bye. Hope to see you again soon!");
+    }
+
+    public static void printMessage(String message) {
         System.out.println(LINE);
 
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(LOGO);
+        System.out.println(message);
 
+        System.out.println(LOGO);
         System.out.println(LINE);
     }
 }
