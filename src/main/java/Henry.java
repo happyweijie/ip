@@ -1,8 +1,29 @@
 public class Henry {
     private static final String LOGO = "--henry";
+    private static final String LINE = "_".repeat(60);
 
     public static void main(String[] args) {
+        printGreeting();
 
-        System.out.println("Hello from Henry" + LOGO);
+        printGoodbye();
+    }
+
+    public static void printGreeting() {
+        System.out.println(LINE);
+
+        System.out.println("Hello from Henry!");
+        System.out.println("What can I do for you?");
+        System.out.println(LOGO);
+
+        System.out.println(LINE);
+    }
+
+    public static void printGoodbye() {
+        System.out.println(LINE);
+
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(LOGO);
+
+        System.out.println(LINE);
     }
 }
