@@ -17,18 +17,26 @@ public class Jimjam {
             String[] parts = scanner.nextLine().split(" ");
             String prompt = parts[0];
 
+            // exit
             if (prompt.equalsIgnoreCase("bye")) {
                 isRunning = false;
-            } else if (prompt.equalsIgnoreCase("list")) {
+            } else if (prompt.equalsIgnoreCase("list")) { // list tasks
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + ": " + tasks.get(i));
                 }
-            } else if (prompt.equalsIgnoreCase("mark")) {
+            } else if (prompt.equalsIgnoreCase("mark")) { // mark
                 int idx = Integer.parseInt(parts[1]) - 1;
                 Task task  = tasks.get(idx);
                 task.markDone();
 
                 printMessage("Nice! I've marked this task as done:\n" +
+                        task);
+            } else if (prompt.equalsIgnoreCase("unmark")) { // unmark
+                int idx = Integer.parseInt(parts[1]) - 1;
+                Task task  = tasks.get(idx);
+                task.unmarkDone();
+
+                printMessage("OK, I've marked this task as not done yet:\n" +
                         task);
             } else { // add task
                 tasks.add(new Task(prompt));
