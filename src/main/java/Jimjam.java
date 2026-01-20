@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Jimjam {
     private static final String LOGO = "--jimjam";
-    private static final String LINE = "_".repeat(60);
 
     public static void main(String[] args) {
         printGreeting();
@@ -20,11 +19,9 @@ public class Jimjam {
             if (prompt.equalsIgnoreCase("bye")) {
                 isRunning = false;
             } else if (prompt.equalsIgnoreCase("list")) {
-                System.out.println(LINE);
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + ": " + tasks.get(i));
                 }
-                System.out.println(LINE);
             } else {
                 tasks.add(prompt);
                 printMessage("added: " + prompt);
@@ -46,11 +43,7 @@ public class Jimjam {
     }
 
     public static void printMessage(String message) {
-        System.out.println(LINE);
-
         System.out.println(message);
-
         System.out.println(LOGO);
-        System.out.println(LINE);
     }
 }
