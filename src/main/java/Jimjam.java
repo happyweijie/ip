@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Jimjam {
     private static final String LOGO = "--jimjam";
@@ -9,14 +11,23 @@ public class Jimjam {
 
         // take user input
         Scanner scanner= new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
+
         boolean isRunning = true;
         while (isRunning) {
             String prompt = scanner.nextLine();
 
             if (prompt.equalsIgnoreCase("bye")) {
                 isRunning = false;
+            } else if (prompt.equalsIgnoreCase("list")) {
+                System.out.println(LINE);
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + ": " + tasks.get(i));
+                }
+                System.out.println(LINE);
             } else {
-                printMessage(prompt);
+                tasks.add(prompt);
+                printMessage("added: " + prompt);
             }
         }
 
