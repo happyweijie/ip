@@ -10,11 +10,12 @@ public class Jimjam {
 
         // take user input
         Scanner scanner= new Scanner(System.in);
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         boolean isRunning = true;
         while (isRunning) {
-            String prompt = scanner.nextLine();
+            String[] parts = scanner.nextLine().split(" ");
+            String prompt = parts[0];
 
             if (prompt.equalsIgnoreCase("bye")) {
                 isRunning = false;
@@ -22,8 +23,15 @@ public class Jimjam {
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + ": " + tasks.get(i));
                 }
-            } else {
-                tasks.add(prompt);
+            } else if (prompt.equalsIgnoreCase("mark")) {
+                int idx = Integer.parseInt(parts[1]) - 1;
+                Task task  = tasks.get(idx);
+                task.markDone();
+
+                printMessage("Nice! I've marked this task as done:\n" +
+                        task);
+            } else { // add task
+                tasks.add(new Task(prompt));
                 printMessage("added: " + prompt);
             }
         }
