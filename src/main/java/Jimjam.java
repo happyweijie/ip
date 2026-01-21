@@ -44,14 +44,14 @@ public class Jimjam {
             default:
                 addTask(input, tasks);
         }
+
         return true;
     }
 
-    private static void listTasks(List<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ": " + tasks.get(i));
-        }
-        System.out.println(LOGO);
+    // ---------- Task handlers ----------
+    private static void addTask(String input, List<Task> tasks) {
+        tasks.add(new Task(input));
+        printMessage("added: " + input);
     }
 
     private static void updateTaskStatus(String[] parts,
@@ -68,9 +68,12 @@ public class Jimjam {
         }
     }
 
-    private static void addTask(String input, List<Task> tasks) {
-        tasks.add(new Task(input));
-        printMessage("added: " + input);
+    // ---------- UI ----------
+    private static void listTasks(List<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ": " + tasks.get(i));
+        }
+        System.out.println(LOGO);
     }
 
     public static void printGreeting() {
