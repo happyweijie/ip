@@ -1,35 +1,35 @@
 #!/usr/bin/env bash
 
+# get the directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$SCRIPT_DIR/.."   # assuming script is in text-ui-test/
+
+BIN_DIR="$PROJECT_ROOT/bin"
+SRC_DIR="$PROJECT_ROOT/src/main/java"
+INPUT_FILE="$SCRIPT_DIR/input.txt"
+EXPECTED_FILE="$SCRIPT_DIR/EXPECTED.TXT"
+ACTUAL_FILE="$SCRIPT_DIR/ACTUAL.TXT"
+
 # create bin directory if it doesn't exist
-if [ ! -d "../bin" ]
-then
-    mkdir ../bin
-fi
+mkdir -p "$BIN_DIR"
 
-# delete output from previous run
-if [ -e "./ACTUAL.TXT" ]
-then
-    rm ACTUAL.TXT
-fi
+# delete previous output
+rm -f "$ACTUAL_FILE"
 
-# compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
-then
+# compile all java files in src/main/java
+if ! javac -d "$BIN_DIR" "$SRC_DIR"/*.java; then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+# run program
+java -cp "$BIN_DIR" Jimjam < "$INPUT_FILE" > "$ACTUAL_FILE"
 
-# convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+# convert line endings to UNIX
+dos2unix "$ACTUAL_FILE" "$EXPECTED_FILE"
 
-# compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
-if [ $? -eq 0 ]
-then
+# compare output
+if diff "$ACTUAL_FILE" "$EXPECTED_FILE" >/dev/null; then
     echo "Test result: PASSED"
     exit 0
 else

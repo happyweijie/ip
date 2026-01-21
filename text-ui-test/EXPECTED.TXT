@@ -1,7 +1,40 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello from Jimjam!
+What can I do for you?
+--jimjam
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+--jimjam
+1: [T][ ] borrow book
+--jimjam
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+--jimjam
+Got it. I've added this task:
+[D][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+--jimjam
+1: [T][ ] borrow book
+2: [D][ ] return book (by: Sunday)
+3: [D][ ] project meeting (from: Mon 2pm to: 4pm)
+--jimjam
+Nice! I've marked this task as done:
+[T][X] borrow book
+--jimjam
+Nice! I've marked this task as done:
+[D][X] return book (by: Sunday)
+--jimjam
+1: [T][X] borrow book
+2: [D][X] return book (by: Sunday)
+3: [D][ ] project meeting (from: Mon 2pm to: 4pm)
+--jimjam
+OK, I've marked this task as not done yet:
+[T][ ] borrow book
+--jimjam
+1: [T][ ] borrow book
+2: [D][X] return book (by: Sunday)
+3: [D][ ] project meeting (from: Mon 2pm to: 4pm)
+--jimjam
+Bye. Hope to see you again soon!
+--jimjam
