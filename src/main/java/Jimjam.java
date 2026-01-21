@@ -22,8 +22,9 @@ public class Jimjam {
     }
 
     private static boolean handleCommand(String input, List<Task> tasks) {
-        String[] parts = input.split(" ");
+        String[] parts = input.split(" ", 2);
         String command = parts[0].toLowerCase();
+        String args = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
             case "bye":
@@ -41,17 +42,45 @@ public class Jimjam {
                 updateTaskStatus(parts, tasks, false);
                 break;
 
+            case "todo":
+                addTodo(args, tasks);
+                break;
+
+            case "deadline":
+                addDeadline(args, tasks);
+                break;
+
+            case "event":
+                addEvent(args, tasks);
+                break;
+
             default:
-                addTask(input, tasks);
+                // Placeholder for invalid commands
+                printMessage("Invalid command");
         }
 
         return true;
     }
 
     // ---------- Task handlers ----------
-    private static void addTask(String input, List<Task> tasks) {
-        tasks.add(new Task(input));
-        printMessage("added: " + input);
+    private static void addTodo(String description, List<Task> tasks) {
+        Task task = new Todo(description);
+        tasks.add(task);
+        printAddMessage(task, tasks.size());
+    }
+
+    private static void addDeadline(String args, List<Task> tasks) {
+        String[] split = args.split(" /by ", 2);
+        Task task = new Deadline(split[0], split[1]);
+        tasks.add(task);
+        printAddMessage(task, tasks.size());
+    }
+
+    private static void addEvent(String args, List<Task> tasks) {
+        String[] split = args.split(" /from | /to ", 3);
+        Task task = new Event(split[0], split[1], split[2]);
+        tasks.add(task);
+        printAddMessage(task, tasks.size());
     }
 
     private static void updateTaskStatus(String[] parts,
@@ -73,6 +102,14 @@ public class Jimjam {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ": " + tasks.get(i));
         }
+        System.out.println(LOGO);
+    }
+
+    private static void printAddMessage(Task task, int size) {
+        // Printed when adding tasks
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + size + " tasks in the list.");
         System.out.println(LOGO);
     }
 
