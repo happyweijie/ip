@@ -108,7 +108,7 @@ public class Jimjam {
     private static void printAddMessage(Task task, int size) {
         // Printed when adding tasks
         System.out.println("Got it. I've added this task:");
-        System.out.println("\t" + task);
+        System.out.println(task);
         System.out.println("Now you have " + size + " tasks in the list.");
         System.out.println(LOGO);
     }
