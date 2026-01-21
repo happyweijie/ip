@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,24 +15,26 @@ public class Jimjam {
 
         boolean isRunning = true;
         while (isRunning) {
-            String[] parts = scanner.nextLine().split(" ");
+            String[] parts = scanner.nextLine()
+                                    .toLowerCase()
+                                    .split(" ");
             String prompt = parts[0];
 
             // exit
-            if (prompt.equalsIgnoreCase("bye")) {
+            if (prompt.equals("bye")) {
                 isRunning = false;
-            } else if (prompt.equalsIgnoreCase("list")) { // list tasks
+            } else if (prompt.equals("list")) { // list tasks
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + ": " + tasks.get(i));
                 }
-            } else if (prompt.equalsIgnoreCase("mark")) { // mark
+            } else if (prompt.equals("mark")) { // mark
                 int idx = Integer.parseInt(parts[1]) - 1;
                 Task task  = tasks.get(idx);
                 task.markDone();
 
                 printMessage("Nice! I've marked this task as done:\n" +
                         task);
-            } else if (prompt.equalsIgnoreCase("unmark")) { // unmark
+            } else if (prompt.equals("unmark")) { // unmark
                 int idx = Integer.parseInt(parts[1]) - 1;
                 Task task  = tasks.get(idx);
                 task.unmarkDone();
