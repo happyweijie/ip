@@ -45,11 +45,11 @@ public class Jimjam {
                 break;
 
             case MARK:
-                updateTaskStatus(parts, tasks, true);
+                updateTaskStatus(args, tasks, true);
                 break;
 
             case UNMARK:
-                updateTaskStatus(parts, tasks, false);
+                updateTaskStatus(args, tasks, false);
                 break;
 
             case TODO:
@@ -116,18 +116,18 @@ public class Jimjam {
         printAddMessage(task, tasks.size());
     }
 
-    private static void updateTaskStatus(String[] parts,
+    private static void updateTaskStatus(String args,
                                          List<Task> tasks,
                                          boolean markDone)
         throws JimjamException {
 
         // handle when no task number is indicated
-        if (parts.length < 2) {
+        if (args.isBlank()) {
             throw new JimjamException("Please specify a task number.");
         }
 
         // zero-index task number
-        int idx = Integer.parseInt(parts[1]) - 1;
+        int idx = Integer.parseInt(args) - 1;
         // handle invalid task index
         if  (idx < 0 || idx >= tasks.size()) {
             throw new JimjamException("Invalid task index.");
