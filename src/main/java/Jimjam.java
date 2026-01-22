@@ -61,6 +61,10 @@ public class Jimjam {
                 addEvent(args, tasks);
                 break;
 
+            case "delete":
+                deleteTask(args, tasks);
+                break;
+
             default:
                 // Unknown command
                 throw new JimjamException("I don't recognise this command.");
@@ -136,6 +140,25 @@ public class Jimjam {
         }
     }
 
+    private static void deleteTask(String args, List<Task> tasks)
+        throws JimjamException {
+
+        if (args.isBlank()) {
+            throw new JimjamException("Please specify a task number.");
+        }
+
+        // zero-index task number
+        int idx = Integer.parseInt(args) - 1;
+        // handle invalid task index
+        if  (idx < 0 || idx >= tasks.size()) {
+            throw new JimjamException("Invalid task index.");
+        }
+
+        // remove task
+        Task task = tasks.remove(idx);
+        printDeleteMessage(task, tasks.size());
+    }
+
     // ---------- UI ----------
     private static void listTasks(List<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
@@ -147,6 +170,14 @@ public class Jimjam {
     private static void printAddMessage(Task task, int size) {
         // Printed when adding tasks
         System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + size + " tasks in the list.");
+        System.out.println(LOGO);
+    }
+
+    private static void printDeleteMessage(Task task, int size) {
+        // Printed when deleting tasks
+        System.out.println("Got it. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + size + " tasks in the list.");
         System.out.println(LOGO);
