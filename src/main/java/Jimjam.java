@@ -29,39 +29,42 @@ public class Jimjam {
 
     private static boolean handleCommand(String input, List<Task> tasks)
         throws JimjamException {
+        // split input
         String[] parts = input.split(" ", 2);
-        String command = parts[0].toLowerCase();
+        // get command
+        Command command = Command.fromString(parts[0]);
+        // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
-            case "bye":
+            case BYE:
                 return false;
 
-            case "list":
+            case LIST:
                 listTasks(tasks);
                 break;
 
-            case "mark":
+            case MARK:
                 updateTaskStatus(parts, tasks, true);
                 break;
 
-            case "unmark":
+            case UNMARK:
                 updateTaskStatus(parts, tasks, false);
                 break;
 
-            case "todo":
+            case TODO:
                 addTodo(args, tasks);
                 break;
 
-            case "deadline":
+            case DEADLINE:
                 addDeadline(args, tasks);
                 break;
 
-            case "event":
+            case EVENT:
                 addEvent(args, tasks);
                 break;
 
-            case "delete":
+            case DELETE:
                 deleteTask(args, tasks);
                 break;
 
