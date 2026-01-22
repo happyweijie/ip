@@ -14,14 +14,21 @@ public class Jimjam {
         boolean isRunning = true;
         while (isRunning) {
             String input = scanner.nextLine().trim();
-            isRunning = handleCommand(input, tasks);
+
+            // run command
+            try {
+                isRunning = handleCommand(input, tasks);
+            } catch (Exception e) { // handle exception
+                printMessage(e.getMessage());
+            }
         }
 
         scanner.close();
         printGoodbye();
     }
 
-    private static boolean handleCommand(String input, List<Task> tasks) {
+    private static boolean handleCommand(String input, List<Task> tasks)
+        throws JimjamException {
         String[] parts = input.split(" ", 2);
         String command = parts[0].toLowerCase();
         String args = parts.length > 1 ? parts[1] : "";
@@ -63,7 +70,14 @@ public class Jimjam {
     }
 
     // ---------- Task handlers ----------
-    private static void addTodo(String description, List<Task> tasks) {
+    private static void addTodo(String description, List<Task> tasks)
+        throws JimjamException {
+
+        // ensure description is not blank
+        if (description.isBlank()) {
+            throw new JimjamException("A todo must have a description.");
+        }
+
         Task task = new Todo(description);
         tasks.add(task);
         printAddMessage(task, tasks.size());
