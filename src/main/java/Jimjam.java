@@ -96,7 +96,13 @@ public class Jimjam {
         printAddMessage(task, tasks.size());
     }
 
-    private static void addEvent(String args, List<Task> tasks) {
+    private static void addEvent(String args, List<Task> tasks)
+        throws JimjamException {
+        // Check that event arguments are correctly formatted
+        if (!args.contains(" /from ") || !args.contains(" /to ")) {
+            throw new JimjamException("Event must include /from and /to.");
+        }
+
         String[] split = args.split(" /from | /to ", 3);
         Task task = new Event(split[0], split[1], split[2]);
         tasks.add(task);
@@ -104,8 +110,21 @@ public class Jimjam {
     }
 
     private static void updateTaskStatus(String[] parts,
-                                         List<Task> tasks, boolean markDone) {
+                                         List<Task> tasks,
+                                         boolean markDone)
+        throws JimjamException {
+
+        // handle when no task number is indicated
+        if (parts.length < 2) {
+            throw new JimjamException("Please specify a task number.");
+        }
+
+        // zero-index task number
         int idx = Integer.parseInt(parts[1]) - 1;
+        // handle invalid task index
+        if  (idx < 0 || idx >= tasks.size()) {
+            throw new JimjamException("Invalid task index.");
+        }
         Task task = tasks.get(idx);
 
         if (markDone) {
