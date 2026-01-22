@@ -83,7 +83,13 @@ public class Jimjam {
         printAddMessage(task, tasks.size());
     }
 
-    private static void addDeadline(String args, List<Task> tasks) {
+    private static void addDeadline(String args, List<Task> tasks)
+        throws JimjamException {
+        // Ensure deadline is formatted correctly
+        if (!args.contains(" /by ")) {
+            throw new JimjamException("Deadline must include /by.");
+        }
+
         String[] split = args.split(" /by ", 2);
         Task task = new Deadline(split[0], split[1]);
         tasks.add(task);
