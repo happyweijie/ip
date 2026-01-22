@@ -55,8 +55,8 @@ public class Jimjam {
                 break;
 
             default:
-                // Placeholder for invalid commands
-                printMessage("Invalid command");
+                // Unknown command
+                printMessage("Unknown command. Please try again.");
         }
 
         return true;
