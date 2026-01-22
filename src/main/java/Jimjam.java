@@ -63,7 +63,7 @@ public class Jimjam {
 
             default:
                 // Unknown command
-                printMessage("Unknown command. Please try again.");
+                throw new JimjamException("I don't recognise this command.");
         }
 
         return true;
