@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
 public class Jimjam {
-
+    private static final String DEFAULT_STORAGE_PATH = "./data/jimjam.txt";
     private Ui ui;
+    private Storage storage;
     private TaskList tasks;
 
     public Jimjam() {
-        ui = new Ui();
-        tasks = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage(DEFAULT_STORAGE_PATH);
+        this.tasks = new TaskList(storage.load());
     }
 
     public static void main(String[] args) {
@@ -27,8 +29,10 @@ public class Jimjam {
             try {
                 isRunning = handleCommand(input);
             } catch (Exception e) { // handle exception
-                this.ui.printMessage(e.getMessage());
+                this.ui.printMessage("Error:" + e.getMessage());
             }
+
+            this.storage.save(this.tasks.getTasks());
         }
 
         scanner.close();
