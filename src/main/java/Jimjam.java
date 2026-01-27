@@ -49,46 +49,46 @@ public class Jimjam {
         String args = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
-            case BYE:
-                return false;
+        case BYE:
+            return false;
 
-            case LIST:
-                this.ui.showTaskList(this.tasks);
-                break;
+        case LIST:
+            this.ui.showTaskList(this.tasks);
+            break;
 
-            case MARK:
-                Task marked = this.tasks.updateTaskStatus(args, true);
-                this.ui.showMarkedTask(marked);
-                break;
+        case MARK:
+            Task marked = this.tasks.updateTaskStatus(args, true);
+            this.ui.showMarkedTask(marked);
+            break;
 
-            case UNMARK:
-                Task unmarked = this.tasks.updateTaskStatus(args, true);
-                this.ui.showUnmarkedTask(unmarked);
-                break;
+        case UNMARK:
+            Task unmarked = this.tasks.updateTaskStatus(args, true);
+            this.ui.showUnmarkedTask(unmarked);
+            break;
 
-            case TODO:
-                Task todo = this.tasks.addTodo(args);
-                this.ui.showAdded(todo, this.tasks.getSize());
-                break;
+        case TODO:
+            Task todo = this.tasks.addTodo(args);
+            this.ui.showAdded(todo, this.tasks.getSize());
+            break;
 
-            case DEADLINE:
-                Task deadline = this.tasks.addDeadline(args);
-                this.ui.showAdded(deadline, this.tasks.getSize());
-                break;
+        case DEADLINE:
+            Task deadline = this.tasks.addDeadline(args);
+            this.ui.showAdded(deadline, this.tasks.getSize());
+            break;
 
-            case EVENT:
-                Task event = this.tasks.addEvent(args);
-                this.ui.showAdded(event, this.tasks.getSize());
-                break;
+        case EVENT:
+            Task event = this.tasks.addEvent(args);
+            this.ui.showAdded(event, this.tasks.getSize());
+            break;
 
-            case DELETE:
-                Task deleted = this.tasks.delete(args);
-                this.ui.showDeleted(deleted, this.tasks.getSize());
-                break;
+        case DELETE:
+            Task deleted = this.tasks.delete(args);
+            this.ui.showDeleted(deleted, this.tasks.getSize());
+            break;
 
-            default:
-                // Unknown command
-                throw new JimjamException("I don't recognise this command.");
+        default:
+            // Unknown command
+            throw new JimjamException("I don't recognise this command.");
         }
 
         return true;
