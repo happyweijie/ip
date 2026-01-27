@@ -36,5 +36,9 @@ OK, I've marked this task as not done yet:
 2: [D][X] return book (by: Sunday)
 3: [E][ ] project meeting (from: Mon 2pm to: 4pm)
 --jimjam
+Got it. I've removed:
+[D][X] return book (by: Sunday)
+Now you have 2 tasks.
+--jimjam
 Bye. Hope to see you again soon!
 --jimjam

@@ -22,6 +22,10 @@ if ! javac -d "$BIN_DIR" "$SRC_DIR"/*.java; then
     exit 1
 fi
 
+# Clean up data files from previous run
+rm -rf "$SCRIPT_DIR/data"
+rm -rf "$PROJECT_ROOT/data"
+
 # run program
 java -cp "$BIN_DIR" Jimjam < "$INPUT_FILE" > "$ACTUAL_FILE"
 
