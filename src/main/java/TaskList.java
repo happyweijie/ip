@@ -12,7 +12,7 @@ public class TaskList {
 		this.tasks = new ArrayList<>();
 	}
 
-	public Task addTask(Task task) {
+	private Task addTask(Task task) {
 		this.tasks.add(task);
 		return task;
 	}
