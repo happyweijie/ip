@@ -28,7 +28,7 @@ public class Jimjam {
             // run command
             try {
                 isRunning = handleCommand(input);
-            } catch (Exception e) { // handle exception
+            } catch (Exception e) {
                 this.ui.printMessage("Error:" + e.getMessage());
             }
 
