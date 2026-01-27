@@ -22,7 +22,7 @@ public class TaskList {
 		return tasks.remove(index);
 	}
 
-	public Task updateStatus(int index, boolean isDone) throws JimjamException {
+	public Task updateTaskStatus(int index, boolean isDone) throws JimjamException {
 		validateIndex(index);
 		Task t = tasks.get(index);
 		if (!isDone) {
