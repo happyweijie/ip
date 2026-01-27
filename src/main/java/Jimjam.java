@@ -1,15 +1,23 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Jimjam {
-    private static final String LOGO = "--jimjam";
+
+    private Ui ui;
+    private TaskList tasks;
+
+    public Jimjam() {
+        ui = new Ui();
+        tasks = new TaskList();
+    }
 
     public static void main(String[] args) {
-        printGreeting();
+        new Jimjam().run();
+    }
+
+    public void run() {
+        this.ui.showWelcome();
 
         Scanner scanner = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
 
         boolean isRunning = true;
         while (isRunning) {
@@ -17,17 +25,17 @@ public class Jimjam {
 
             // run command
             try {
-                isRunning = handleCommand(input, tasks);
+                isRunning = handleCommand(input);
             } catch (Exception e) { // handle exception
-                printMessage(e.getMessage());
+                this.ui.printMessage(e.getMessage());
             }
         }
 
         scanner.close();
-        printGoodbye();
+        this.ui.showGoodbye();
     }
 
-    private static boolean handleCommand(String input, List<Task> tasks)
+    private boolean handleCommand(String input)
         throws JimjamException {
         // split input
         String[] parts = input.split(" ", 2);
@@ -41,31 +49,36 @@ public class Jimjam {
                 return false;
 
             case LIST:
-                listTasks(tasks);
+                this.ui.showTaskList(this.tasks);
                 break;
 
             case MARK:
-                updateTaskStatus(args, tasks, true);
+                Task marked = this.tasks.updateTaskStatus(args, true);
+                this.ui.showMarkedTask(marked);
                 break;
 
             case UNMARK:
-                updateTaskStatus(args, tasks, false);
+                Task unmarked = this.tasks.updateTaskStatus(args, true);
+                this.ui.showUnmarkedTask(unmarked);
                 break;
 
             case TODO:
-                addTodo(args, tasks);
+                Task todo = this.tasks.addTodo(args);
+                this.ui.showAdded(todo, this.tasks.getSize());
                 break;
 
             case DEADLINE:
-                addDeadline(args, tasks);
+                Task deadline = this.tasks.addDeadline(args);
+                this.ui.showAdded(deadline, this.tasks.getSize());
                 break;
 
             case EVENT:
-                addEvent(args, tasks);
-                break;
+                Task event = this.tasks.addEvent(args);
+                this.ui.showAdded(event, this.tasks.getSize());
 
             case DELETE:
-                deleteTask(args, tasks);
+                Task deleted = this.tasks.delete(args);
+                this.ui.showDeleted(deleted, this.tasks.getSize());
                 break;
 
             default:
@@ -74,130 +87,5 @@ public class Jimjam {
         }
 
         return true;
-    }
-
-    // ---------- Task handlers ----------
-    private static void addTodo(String description, List<Task> tasks)
-        throws JimjamException {
-
-        // ensure description is not blank
-        if (description.isBlank()) {
-            throw new JimjamException("A todo must have a description.");
-        }
-
-        Task task = new Todo(description);
-        tasks.add(task);
-        printAddMessage(task, tasks.size());
-    }
-
-    private static void addDeadline(String args, List<Task> tasks)
-        throws JimjamException {
-        // Ensure deadline is formatted correctly
-        if (!args.contains(" /by ")) {
-            throw new JimjamException("Deadline must include /by.");
-        }
-
-        String[] split = args.split(" /by ", 2);
-        Task task = new Deadline(split[0], split[1]);
-        tasks.add(task);
-        printAddMessage(task, tasks.size());
-    }
-
-    private static void addEvent(String args, List<Task> tasks)
-        throws JimjamException {
-        // Check that event arguments are correctly formatted
-        if (!args.contains(" /from ") || !args.contains(" /to ")) {
-            throw new JimjamException("Event must include /from and /to.");
-        }
-
-        String[] split = args.split(" /from | /to ", 3);
-        Task task = new Event(split[0], split[1], split[2]);
-        tasks.add(task);
-        printAddMessage(task, tasks.size());
-    }
-
-    private static void updateTaskStatus(String args,
-                                         List<Task> tasks,
-                                         boolean markDone)
-        throws JimjamException {
-
-        // handle when no task number is indicated
-        if (args.isBlank()) {
-            throw new JimjamException("Please specify a task number.");
-        }
-
-        // zero-index task number
-        int idx = Integer.parseInt(args) - 1;
-        // handle invalid task index
-        if  (idx < 0 || idx >= tasks.size()) {
-            throw new JimjamException("Invalid task index.");
-        }
-        Task task = tasks.get(idx);
-
-        if (markDone) {
-            task.markDone();
-            printMessage("Nice! I've marked this task as done:\n" + task);
-        } else {
-            task.unmarkDone();
-            printMessage("OK, I've marked this task as not done yet:\n" + task);
-        }
-    }
-
-    private static void deleteTask(String args, List<Task> tasks)
-        throws JimjamException {
-
-        if (args.isBlank()) {
-            throw new JimjamException("Please specify a task number.");
-        }
-
-        // zero-index task number
-        int idx = Integer.parseInt(args) - 1;
-        // handle invalid task index
-        if  (idx < 0 || idx >= tasks.size()) {
-            throw new JimjamException("Invalid task index.");
-        }
-
-        // remove task
-        Task task = tasks.remove(idx);
-        printDeleteMessage(task, tasks.size());
-    }
-
-    // ---------- UI ----------
-    private static void listTasks(List<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ": " + tasks.get(i));
-        }
-        System.out.println(LOGO);
-    }
-
-    private static void printAddMessage(Task task, int size) {
-        // Printed when adding tasks
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        System.out.println(LOGO);
-    }
-
-    private static void printDeleteMessage(Task task, int size) {
-        // Printed when deleting tasks
-        System.out.println("Got it. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        System.out.println(LOGO);
-    }
-
-    public static void printGreeting() {
-        String greeting = "Hello from Jimjam!\n" +
-                "What can I do for you?";
-        printMessage(greeting);
-    }
-
-    public static void printGoodbye() {
-        printMessage("Bye. Hope to see you again soon!");
-    }
-
-    public static void printMessage(String message) {
-        System.out.println(message);
-        System.out.println(LOGO);
     }
 }

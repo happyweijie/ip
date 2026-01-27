@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Ui {
 	private static final String LOGO = "--jimjam";
 
@@ -30,5 +32,15 @@ public class Ui {
 	public void showDeleted(Task task, int size) {
 		printMessage("Got it. I've removed:\n" + task + "\n" +
 				"Now you have " + size + " tasks.");
+	}
+
+	public void showMarkedTask(Task task) {
+		printMessage("Nice! I've marked this task as done:\n" +
+				task);
+	}
+
+	public void showUnmarkedTask(Task task) {
+		printMessage("OK, I've marked this task as not done yet:\n" +
+				task);
 	}
 }
