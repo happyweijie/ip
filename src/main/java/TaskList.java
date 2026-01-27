@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class TaskList {
 
 		String[] split = args.split(" /by ", 2);
 		String description = split[0];
-		String by = split[1];
+		LocalDate by = Parser.parseDate(split[1]);
 
 		return this.addTask(new Deadline(description, by));
 	}
@@ -49,8 +50,8 @@ public class TaskList {
 		String[] split = args.split(" /from | /to ", 3);
 
 		String description = split[0];
-		String start = split[1];
-		String end = split[2];
+		LocalDate start = Parser.parseDate(split[1]);
+		LocalDate end = Parser.parseDate(split[2]);;
 		return this.addTask(new Event(description, start, end));
 	}
 
