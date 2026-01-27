@@ -9,6 +9,14 @@ public class Event extends Task  {
         this.end = end;
     }
 
+    @Override
+    public String export() {
+        return String.format("E %s | %s | %s",
+                super.export(),
+                this.start,
+                this.end);
+    }
+
     public String toString() {
         return String.format("[D]%s (from: %s to: %s)",
                 super.toString(), this.start, this.end);
