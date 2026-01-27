@@ -12,15 +12,15 @@ public class Parser {
 		String description = parts[2];
 
 		return switch (type) {
-			case "T" -> new Todo(description, isDone);
-			case "D" -> new Deadline(description,
-					isDone,
-					parseDate(parts[3])); // deadline date
-			case "E" -> new Event(description,
-					isDone,
-					parseDate(parts[3]), // start date
-					parseDate(parts[4])); // end date
-			default -> null;
+		case "T" -> new Todo(description, isDone);
+		case "D" -> new Deadline(description,
+				isDone,
+				parseDate(parts[3])); // deadline date
+		case "E" -> new Event(description,
+				isDone,
+				parseDate(parts[3]), // start date
+				parseDate(parts[4])); // end date
+		default -> null;
 		};
 	}
 
