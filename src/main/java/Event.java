@@ -17,11 +17,16 @@ public class Event extends Task  {
     }
 
     @Override
-    public String export() {
-        return String.format("E %s | %s | %s",
-                super.export(),
-                this.start,
-                this.end);
+    public String getIcon() {
+        return "E";
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getEnd() {
+        return end;
     }
 
     public String toString() {

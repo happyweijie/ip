@@ -9,8 +9,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String export() {
-        return String.format("T %s", super.export());
+    public String getIcon() {
+        return "T";
     }
 
     @Override

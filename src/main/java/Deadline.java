@@ -13,10 +13,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String export() {
-        return String.format("D %s | %s",
-                super.export(),
-                this.by);
+    public String getIcon() {
+        return "D";
+    }
+
+    public String getBy() {
+        return by;
     }
 
     @Override

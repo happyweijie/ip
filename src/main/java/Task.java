@@ -15,9 +15,13 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public int getProgress() {
-        // Returns 1 if task is done else 0
-        return (isDone ? 1 : 0);
+    public abstract String getIcon();
+
+    public String getDescription() {
+        return description;
+    }
+    public boolean isDone() {
+        return isDone;
     }
 
     public void markDone() {
@@ -26,12 +30,6 @@ public abstract class Task {
     
     public void unmarkDone() {
         this.isDone = false;
-    }
-
-    public String export() {
-        return  String.format("| %d | %s",
-                this.getProgress(),
-                this.description);
     }
 
     @Override
