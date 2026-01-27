@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
 
-	public static Task parseFileFileLine(String line) {
+	public static Task parseFileFileLine(String line) throws JimjamException {
 		// Use " \\| " to split by the pipe symbol and handle surrounding spaces
 		String[] parts = line.split(" \\| ");
 		String type = parts[0];
@@ -9,14 +13,23 @@ public class Parser {
 
 		return switch (type) {
 			case "T" -> new Todo(description, isDone);
-			case "D" ->
-				// parts[3] contains the deadline string
-					new Deadline(description, isDone, parts[3]);
-			case "E" ->
-				// parts[3] contains the event time string
-					new Event(description, isDone, parts[3], parts[4]);
+			case "D" -> new Deadline(description,
+					isDone,
+					parseDate(parts[3])); // deadline date
+			case "E" -> new Event(description,
+					isDone,
+					parseDate(parts[3]), // start date
+					parseDate(parts[4])); // end date
 			default -> null;
 		};
+	}
+
+	public static LocalDate parseDate(String dateStr) throws JimjamException {
+		try {
+			return LocalDate.parse(dateStr.trim());
+		} catch (DateTimeParseException e) {
+			throw new JimjamException("Invalid date format! Please use YYYY-MM-DD");
+		}
 	}
 
 	public static String taskToFileLine(Task t) {
