@@ -79,6 +79,7 @@ public class Jimjam {
             case EVENT:
                 Task event = this.tasks.addEvent(args);
                 this.ui.showAdded(event, this.tasks.getSize());
+                break;
 
             case DELETE:
                 Task deleted = this.tasks.delete(args);
