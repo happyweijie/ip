@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-	public static Task parseFileFileLine(String line) throws JimjamException {
+	public static Task parseFileLine(String line) throws JimjamException {
 		// Use " \\| " to split by the pipe symbol and handle surrounding spaces
 		String[] parts = line.split(" \\| ");
 		String type = parts[0];

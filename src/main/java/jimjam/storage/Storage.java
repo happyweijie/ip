@@ -32,7 +32,7 @@ public class Storage {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				try {
-					Task task = Parser.parseFileFileLine(line);
+					Task task = Parser.parseFileLine(line);
 					if (task != null) {
 						tasks.add(task);
 					}
