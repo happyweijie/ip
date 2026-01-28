@@ -38,7 +38,7 @@ public class Jimjam {
             try {
                 isRunning = handleCommand(input);
             } catch (Exception e) {
-                this.ui.printMessage("Error:" + e.getMessage());
+                this.ui.printMessage(e.getMessage());
             }
 
             this.storage.save(this.tasks.getTasks());
