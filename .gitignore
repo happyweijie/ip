@@ -18,6 +18,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Java
 *.class
+/META-INF
 
 # Data files
 /data
