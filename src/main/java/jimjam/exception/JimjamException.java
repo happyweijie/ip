@@ -1,6 +1,6 @@
-package jimjam;
+package jimjam.exception;
 
-class JimjamException extends Exception {
+public class JimjamException extends Exception {
     public JimjamException(String message) {
         super(message);
     }

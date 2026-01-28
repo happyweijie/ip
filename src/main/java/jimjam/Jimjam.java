@@ -1,5 +1,6 @@
 package jimjam;
 
+import jimjam.exception.JimjamException;
 import jimjam.task.Task;
 import jimjam.task.TaskList;
 

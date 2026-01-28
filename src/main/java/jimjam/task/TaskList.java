@@ -1,6 +1,6 @@
 package jimjam.task;
 
-import jimjam.JimjamException;
+import jimjam.exception.JimjamException;
 import jimjam.Parser;
 
 import java.time.LocalDate;

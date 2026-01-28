@@ -1,5 +1,6 @@
 package jimjam;
 
+import jimjam.exception.JimjamException;
 import jimjam.task.Deadline;
 import jimjam.task.Event;
 import jimjam.task.Task;
