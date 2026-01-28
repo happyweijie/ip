@@ -18,7 +18,7 @@ public class TaskList {
 		this.tasks = new ArrayList<>();
 	}
 
-	private Task addTask(Task task) {
+	protected Task addTask(Task task) {
 		this.tasks.add(task);
 		return task;
 	}
@@ -60,17 +60,17 @@ public class TaskList {
 		return this.addTask(new Event(description, start, end));
 	}
 
-	public Task delete(String args) throws JimjamException {
+	public Task deleteTask(String args) throws JimjamException {
 		if (args.isBlank()) {
 			throw new JimjamException("Please specify a task number.");
 		}
 
-		// zero-index task number
-		int idx = Integer.parseInt(args) - 1;
-		return this.delete(idx);
+		return this.delete(Integer.parseInt(args));
 	}
 
-	public Task delete(int index) throws JimjamException {
+	public Task deleteTask(int index) throws JimjamException {
+		// zero-index task number
+		index -= 1;
 		this.validateIndex(index);
 		return tasks.remove(index);
 	}
