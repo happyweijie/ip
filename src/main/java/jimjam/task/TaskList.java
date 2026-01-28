@@ -65,7 +65,7 @@ public class TaskList {
 			throw new JimjamException("Please specify a task number.");
 		}
 
-		return this.delete(Integer.parseInt(args));
+		return this.deleteTask(Integer.parseInt(args));
 	}
 
 	public Task deleteTask(int index) throws JimjamException {

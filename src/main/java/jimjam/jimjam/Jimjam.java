@@ -91,7 +91,7 @@ public class Jimjam {
             break;
 
         case DELETE:
-            Task deleted = this.tasks.delete(args);
+            Task deleted = this.tasks.deleteTask(args);
             this.ui.showDeleted(deleted, this.tasks.getSize());
             break;
 
