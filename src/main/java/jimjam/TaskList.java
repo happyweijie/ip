@@ -1,3 +1,5 @@
+package jimjam;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class TaskList {
 			throws JimjamException {
 		// Ensure deadline is formatted correctly
 		if (!args.contains(" /by ")) {
-			throw new JimjamException("Deadline must include /by.");
+			throw new JimjamException("jimjam.Deadline must include /by.");
 		}
 
 		String[] split = args.split(" /by ", 2);
@@ -44,7 +46,7 @@ public class TaskList {
 			throws JimjamException {
 		// Check that event arguments are correctly formatted
 		if (!args.contains(" /from ") || !args.contains(" /to ")) {
-			throw new JimjamException("Event must include /from and /to.");
+			throw new JimjamException("jimjam.Event must include /from and /to.");
 		}
 
 		String[] split = args.split(" /from | /to ", 3);

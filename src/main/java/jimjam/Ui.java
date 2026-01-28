@@ -1,3 +1,5 @@
+package jimjam;
+
 import java.util.List;
 
 public class Ui {
@@ -8,7 +10,7 @@ public class Ui {
 	}
 
 	public void showWelcome() {
-		printMessage("Hello from Jimjam!\n" +
+		printMessage("Hello from jimjam.Jimjam!\n" +
 				"What can I do for you?");
 	}
 

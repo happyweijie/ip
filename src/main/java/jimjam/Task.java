@@ -1,3 +1,5 @@
+package jimjam;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
