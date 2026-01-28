@@ -1,4 +1,4 @@
-package jimjam;
+package jimjam.ui;
 
 import jimjam.exception.JimjamException;
 

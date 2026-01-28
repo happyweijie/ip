@@ -1,4 +1,4 @@
-package jimjam;
+package jimjam.ui;
 
 import jimjam.task.Task;
 import jimjam.task.TaskList;
