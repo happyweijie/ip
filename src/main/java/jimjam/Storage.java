@@ -1,5 +1,7 @@
 package jimjam;
 
+import jimjam.tasks.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

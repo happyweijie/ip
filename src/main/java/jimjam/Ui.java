@@ -1,5 +1,8 @@
 package jimjam;
 
+import jimjam.tasks.Task;
+import jimjam.tasks.TaskList;
+
 import java.util.List;
 
 public class Ui {
