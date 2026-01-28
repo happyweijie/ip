@@ -1,4 +1,4 @@
-# jimjam.jimjam.Jimjam
+# Jimjam
 
 This is a project template for a greenfield Java project. Given below are instructions on how to use it.
 
