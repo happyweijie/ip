@@ -1,3 +1,8 @@
+package jimjam.storage;
+
+import jimjam.parser.Parser;
+import jimjam.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

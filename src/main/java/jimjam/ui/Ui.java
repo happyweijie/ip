@@ -1,3 +1,8 @@
+package jimjam.ui;
+
+import jimjam.task.Task;
+import jimjam.task.TaskList;
+
 import java.util.List;
 
 public class Ui {
@@ -8,7 +13,7 @@ public class Ui {
 	}
 
 	public void showWelcome() {
-		printMessage("Hello from Jimjam!\n" +
+		printMessage("Hello from jimjam.jimjam.Jimjam!\n" +
 				"What can I do for you?");
 	}
 

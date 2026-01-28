@@ -1,3 +1,12 @@
+package jimjam.jimjam;
+
+import jimjam.exception.JimjamException;
+import jimjam.storage.Storage;
+import jimjam.task.Task;
+import jimjam.task.TaskList;
+import jimjam.ui.Command;
+import jimjam.ui.Ui;
+
 import java.util.Scanner;
 
 public class Jimjam {
