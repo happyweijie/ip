@@ -1,6 +1,7 @@
 package jimjam.parser;
 
 import jimjam.exception.JimjamException;
+import jimjam.TaskStub;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,6 +29,22 @@ public class ParserTest {
 		assertThrows(
 				JimjamException.class,
 				() -> Parser.parseDate("not-a-date")
+		);
+	}
+
+	@Test
+	public void taskToFileLine_unmarkedTask_success() {
+		assertEquals(
+				"S | 0 | test",
+				Parser.taskToFileLine(new TaskStub("test"))
+		);
+	}
+
+	@Test
+	public void taskToFileLine_markedTask_success() {
+		assertEquals(
+				"S | 1 | test",
+				Parser.taskToFileLine(new TaskStub("test", true))
 		);
 	}
 }
