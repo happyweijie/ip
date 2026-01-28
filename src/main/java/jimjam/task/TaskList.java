@@ -1,4 +1,4 @@
-package jimjam.tasks;
+package jimjam.task;
 
 import jimjam.JimjamException;
 import jimjam.Parser;

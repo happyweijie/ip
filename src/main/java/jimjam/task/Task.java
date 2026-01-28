@@ -1,4 +1,4 @@
-package jimjam.tasks;
+package jimjam.task;
 
 public abstract class Task {
     protected String description;

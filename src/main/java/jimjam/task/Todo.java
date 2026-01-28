@@ -1,4 +1,4 @@
-package jimjam.tasks;
+package jimjam.task;
 
 public class Todo extends Task {
 

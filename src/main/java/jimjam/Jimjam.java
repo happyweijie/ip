@@ -1,7 +1,7 @@
 package jimjam;
 
-import jimjam.tasks.Task;
-import jimjam.tasks.TaskList;
+import jimjam.task.Task;
+import jimjam.task.TaskList;
 
 import java.util.Scanner;
 

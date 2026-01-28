@@ -1,9 +1,9 @@
 package jimjam;
 
-import jimjam.tasks.Deadline;
-import jimjam.tasks.Event;
-import jimjam.tasks.Task;
-import jimjam.tasks.Todo;
+import jimjam.task.Deadline;
+import jimjam.task.Event;
+import jimjam.task.Task;
+import jimjam.task.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

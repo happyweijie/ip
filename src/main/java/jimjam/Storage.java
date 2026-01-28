@@ -1,6 +1,6 @@
 package jimjam;
 
-import jimjam.tasks.Task;
+import jimjam.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
