@@ -1,4 +1,4 @@
-package jimjam;
+package jimjam.parser;
 
 import jimjam.exception.JimjamException;
 import jimjam.task.Deadline;

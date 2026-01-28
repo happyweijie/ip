@@ -1,5 +1,6 @@
 package jimjam;
 
+import jimjam.parser.Parser;
 import jimjam.task.Task;
 
 import java.io.File;

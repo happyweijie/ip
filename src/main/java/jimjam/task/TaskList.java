@@ -1,7 +1,7 @@
 package jimjam.task;
 
 import jimjam.exception.JimjamException;
-import jimjam.Parser;
+import jimjam.parser.Parser;
 
 import java.time.LocalDate;
 import java.util.List;
