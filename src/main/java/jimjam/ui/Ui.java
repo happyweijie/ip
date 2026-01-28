@@ -13,7 +13,7 @@ public class Ui {
 	}
 
 	public void showWelcome() {
-		printMessage("Hello from jimjam.jimjam.Jimjam!\n" +
+		printMessage("Hello from Jimjam!\n" +
 				"What can I do for you?");
 	}
 
