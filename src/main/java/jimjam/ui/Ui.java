@@ -22,6 +22,12 @@ public class Ui {
 	}
 
 	public void showTaskList(TaskList taskList) {
+		// Handle empty taskList
+		if (taskList.getSize() == 0) {
+			printMessage("No tasks to show!");
+			return;
+		}
+
 		List<Task> tasks = taskList.getTasks();
 		for (int i = 0; i < tasks.size(); i++) {
 			System.out.println((i + 1) + ": " + tasks.get(i));
