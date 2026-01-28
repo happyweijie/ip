@@ -1,4 +1,4 @@
-package jimjam;
+package jimjam.storage;
 
 import jimjam.parser.Parser;
 import jimjam.task.Task;
