@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Jimjam {
     private static final String DEFAULT_STORAGE_PATH = "./data/jimjam.txt";
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
     public Jimjam() {
         this.ui = new Ui();
