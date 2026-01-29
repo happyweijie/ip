@@ -37,6 +37,12 @@ public class Ui {
 		printMessage("Bye. Hope to see you again soon!");
 	}
 
+	/**
+	 * Prints all tasks in the search result.
+	 * If the list is empty, a notification message is shown instead.
+	 *
+	 * @param results The {@link TaskList} containing the search results.
+	 */
 	public void showSearchResults(TaskList results) {
 		if (results.getSize() > 0) {
 			System.out.println("Here are the matching tasks in your list:");
