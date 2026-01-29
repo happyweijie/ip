@@ -7,6 +7,7 @@ import jimjam.task.TaskList;
 import jimjam.ui.Command;
 import jimjam.ui.Ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Jimjam {
@@ -94,6 +95,11 @@ public class Jimjam {
             Task deleted = this.tasks.deleteTask(args);
             this.ui.showDeleted(deleted, this.tasks.getSize());
             break;
+
+		case FIND:
+			TaskList res = this.tasks.searchTasks(args);
+			this.ui.showSearchResults(res);
+			break;
 
         default:
             // Unknown command

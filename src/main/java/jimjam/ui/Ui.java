@@ -21,6 +21,14 @@ public class Ui {
 		printMessage("Bye. Hope to see you again soon!");
 	}
 
+	public void showSearchResults(TaskList results) {
+		if (results.getSize() > 0) {
+			System.out.println("Here are the matching tasks in your list:");
+		}
+
+		showTaskList(results);
+	}
+
 	public void showTaskList(TaskList taskList) {
 		// Handle empty taskList
 		if (taskList.getSize() == 0) {
