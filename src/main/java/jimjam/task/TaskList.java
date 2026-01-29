@@ -145,9 +145,7 @@ public class TaskList {
 			throw new JimjamException("Please specify a task number.");
 		}
 
-		// zero-index task number
-		int idx = Integer.parseInt(args) - 1;
-		return updateTaskStatus(idx, isDone);
+		return updateTaskStatus(Integer.parseInt(args), isDone);
 	}
 
 	/**
@@ -159,6 +157,8 @@ public class TaskList {
 	 * @throws JimjamException If the index is invalid
 	 */
 	public Task updateTaskStatus(int index, boolean isDone) throws JimjamException {
+		// zero-index task number
+		index -= 1;
 		this.validateIndex(index);
 		Task t = tasks.get(index);
 		if (isDone) {
