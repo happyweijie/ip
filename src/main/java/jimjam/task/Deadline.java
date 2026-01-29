@@ -22,16 +22,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    private static LocalDate parseDate(String date) {
-        try {
-            // Parse using yyyy-mm-dd
-            return LocalDate.parse(date);
-        } catch (DateTimeParseException d) {
-            // Set to today's date by default
-            return LocalDate.now();
-        }
-    }
-
     @Override
     public String getIcon() {
         return "D";
