@@ -13,13 +13,29 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles loading and saving tasks to a local file.
+ * This class ensures that task data persists between application sessions.
+ */
 public class Storage {
 	private final String filePath;
 
+	/**
+	 * Initializes the Storage object with a specific file path.
+	 *
+	 * @param filePath The path to the file where tasks are stored (e.g., "./data/tasks.txt").
+	 */
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Loads tasks from the file system.
+	 * If the file does not exist, it returns an empty list.
+	 * Corrupted lines within the file are skipped.
+	 *
+	 * @return A list of {@link Task} objects loaded from the file.
+	 */
 	public List<Task> load() {
 		List<Task> tasks = new ArrayList<>();
 		File file = new File(filePath);
@@ -47,6 +63,12 @@ public class Storage {
 		return tasks;
 	}
 
+	/**
+	 * Saves the current list of tasks to the file system.
+	 * Automatically creates the necessary parent directories if they do not exist.
+	 *
+	 * @param tasks The list of {@link Task} objects to persist.
+	 */
 	public void save(List<Task> tasks) {
 		try {
 			// OS-independent path handling
