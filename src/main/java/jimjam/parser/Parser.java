@@ -9,8 +9,18 @@ import jimjam.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Translates between raw strings (from user input or files) and Task objects.
+ * This class handles the serialization and deserialization logic for the application.
+ */
 public class Parser {
 
+	/**
+	 * Parses a single line from the storage file into a {@link Task} object.
+	 * @param line The formatted string from the save file.
+	 * @return The corresponding Task (Todo, Deadline, or Event).
+	 * @throws JimjamException If the file format is corrupted or the task type is unknown.
+	 */
 	public static Task parseFileLine(String line) throws JimjamException {
 		// Use " \\| " to split by the pipe symbol and handle surrounding spaces
 		String[] parts = line.split(" \\| ");
@@ -31,6 +41,13 @@ public class Parser {
 		};
 	}
 
+	/**
+	 * Converts a string representation of a date into a {@link LocalDate}.
+	 *
+	 * @param dateStr The date string in YYYY-MM-DD format.
+	 * @return The parsed LocalDate.
+	 * @throws JimjamException If the date format is invalid.
+	 */
 	public static LocalDate parseDate(String dateStr) throws JimjamException {
 		try {
 			return LocalDate.parse(dateStr.trim());
@@ -39,6 +56,12 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Converts a Task object into a formatted string for file storage.
+	 *
+	 * @param t The task to be serialized.
+	 * @return A pipe-separated string representing the task.
+	 */
 	public static String taskToFileLine(Task t) {
 		String status = t.isDone() ? "1" : "0";
 		String type = t.getIcon(); // Assuming "T", "D", or "E"
