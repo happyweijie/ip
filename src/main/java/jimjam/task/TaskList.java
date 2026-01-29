@@ -75,6 +75,13 @@ public class TaskList {
 		return tasks.remove(index);
 	}
 
+	public List<Task> searchTasks(String substring) {
+		return this.tasks.stream()
+				.filter(task -> task.getDescription()
+						.toLowerCase()
+						.contains(substring.toLowerCase()))
+				.toList();
+	}
 	public Task updateTaskStatus(String args, boolean isDone)
 			throws JimjamException {
 		// handle when no task number is indicated
