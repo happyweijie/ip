@@ -9,22 +9,42 @@ import jimjam.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * The main entry point for the Jimjam task management application.
+ * This class coordinates the user interface, file storage, and task list logic
+ * to provide a functioning chatbot experience.
+ */
 public class Jimjam {
+    /** Default path where the task data is saved. */
     private static final String DEFAULT_STORAGE_PATH = "./data/jimjam.txt";
+
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
+    /**
+     * Initializes the Jimjam application components.
+     * Loads existing tasks from storage upon startup.
+     */
     public Jimjam() {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
         this.tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Entry point for launching the application.
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         new Jimjam().run();
     }
 
+    /**
+     * Starts the main execution loop of the application.
+     * Displays a welcome message and continuously processes user input until
+     * the "BYE" command is received.
+     */
     public void run() {
         this.ui.showWelcome();
 
@@ -48,6 +68,12 @@ public class Jimjam {
         this.ui.showGoodbye();
     }
 
+    /**
+     * Interprets and executes the command provided by the user.
+     * * @param input The raw input string from the user.
+     * @return true to continue the application, false to exit.
+     * @throws JimjamException If the command is invalid or arguments are missing.
+     */
     private boolean handleCommand(String input)
         throws JimjamException {
         // split input
