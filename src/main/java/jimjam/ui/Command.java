@@ -22,7 +22,10 @@ public enum Command {
     /** Creates a task with a start and end time. */
     EVENT,
     /** Removes a task from the list. */
-    DELETE;
+    DELETE,
+    /** Search for tasks containing a query as substring */
+    FIND;
+
 
     /**
      * Translates a string input into a Command.

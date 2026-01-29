@@ -131,6 +131,23 @@ public class TaskList {
 	}
 
 	/**
+	 * Filters the task list for tasks whose descriptions contain the specified substring.
+	 * The search is performed case-insensitively. If the provided substring is empty,
+	 * a copy of the original task list is returned.
+	 *
+	 * @param substring The search term to look for within task descriptions.
+	 * @return A new {@link TaskList} containing only the tasks that match the search criteria.
+	 */
+	public TaskList searchTasks(String substring) {
+		List<Task> res = this.tasks.stream()
+				.filter(task -> task.getDescription()
+						.toLowerCase()
+						.contains(substring.toLowerCase()))
+				.toList();
+		return new TaskList(res);
+	}
+
+	/**
 	 * Updates the completion status of the specified task.
 	 *
 	 * @param args String representing the task number (1-based)
