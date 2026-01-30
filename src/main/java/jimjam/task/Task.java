@@ -57,17 +57,12 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as completed.
+     * Updates the completion status of the task to the specified boolean value
+     *
+     * @param isDone Completion status of the task.
      */
-    public void markDone() {
-        this.isDone = true;
-    }
-
-    /**
-     * Marks the task as not completed.
-     */
-    public void unmarkDone() {
-        this.isDone = false;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

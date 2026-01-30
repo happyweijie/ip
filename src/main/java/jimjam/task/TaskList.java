@@ -177,12 +177,10 @@ public class TaskList {
 		// zero-index task number
 		index -= 1;
 		this.validateIndex(index);
+
 		Task t = tasks.get(index);
-		if (isDone) {
-			t.markDone();
-		} else {
-			t.unmarkDone();
-		}
+		t.setDone(isDone);
+
 		return t;
 	}
 
