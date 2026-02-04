@@ -98,7 +98,7 @@ public class Jimjam {
             break;
 
         case UNMARK:
-            Task unmarked = this.tasks.updateTaskStatus(args, true);
+            Task unmarked = this.tasks.updateTaskStatus(args, false);
             System.out.println(this.ui.unmarkedTaskMessage(unmarked));
             break;
 
@@ -160,7 +160,7 @@ public class Jimjam {
             return this.ui.markedTaskMessage(marked);
 
         case UNMARK:
-            Task unmarked = this.tasks.updateTaskStatus(args, true);
+            Task unmarked = this.tasks.updateTaskStatus(args, false);
             return this.ui.unmarkedTaskMessage(unmarked);
 
         case TODO:
