@@ -134,4 +134,58 @@ public class Jimjam {
 
         return true;
     }
+
+    /**
+     * Interprets and executes the command provided by the user.
+     * @param input The raw input string from the user.
+     * @return true to continue the application, false to exit.
+     * @throws JimjamException If the command is invalid or arguments are missing.
+     */
+    public String getResponse(String input) throws JimjamException {
+        String[] parts = input.split(" ", 2);
+        // get command
+        Command command = Command.fromString(parts[0]);
+        // additional argument if present
+        String args = parts.length > 1 ? parts[1] : "";
+
+        switch (command) {
+        case BYE:
+            return this.ui.goodbyeMessage();
+
+        case LIST:
+            return this.ui.taskListMessage(this.tasks);
+
+        case MARK:
+            Task marked = this.tasks.updateTaskStatus(args, true);
+            return this.ui.markedTaskMessage(marked);
+
+        case UNMARK:
+            Task unmarked = this.tasks.updateTaskStatus(args, true);
+            return this.ui.unmarkedTaskMessage(unmarked);
+
+        case TODO:
+            Task todo = this.tasks.addTodo(args);
+            return this.ui.addTaskMessage(todo, this.tasks.getSize());
+
+        case DEADLINE:
+            Task deadline = this.tasks.addDeadline(args);
+            return this.ui.addTaskMessage(deadline, this.tasks.getSize());
+
+        case EVENT:
+            Task event = this.tasks.addEvent(args);
+            return this.ui.addTaskMessage(event, this.tasks.getSize());
+
+        case DELETE:
+            Task deleted = this.tasks.deleteTask(args);
+            return this.ui.deleteTaskMessage(deleted, this.tasks.getSize());
+
+        case FIND:
+            TaskList res = this.tasks.searchTasks(args);
+            return this.ui.searchResultsMessage(res);
+
+        default:
+            // Unknown command
+            throw new JimjamException("I don't recognise this command.");
+        }
+    }
 }
