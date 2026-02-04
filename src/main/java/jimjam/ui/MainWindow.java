@@ -37,6 +37,12 @@ public class MainWindow extends AnchorPane {
     /** Injects the Jimjam instance */
     public void setJimjam(Jimjam jimjam) {
         this.jimjam = jimjam;
+
+        // Add welcome message
+        String welcome = jimjam.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getJimjamDialog(welcome, dukeImage)
+        );
     }
 
     /**

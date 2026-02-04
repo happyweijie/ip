@@ -86,4 +86,13 @@ public class Jimjam {
             throw new JimjamException("I don't recognise this command.");
         }
     }
+
+    /**
+     * Returns Jimjam's welcome message to the user
+     *
+     * @return Jimjam's welcome message
+     */
+    public String getWelcomeMessage() {
+        return this.ui.welcomeMessage();
+    }
 }
