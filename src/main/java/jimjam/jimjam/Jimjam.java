@@ -36,7 +36,7 @@ public class Jimjam {
     /**
      * Interprets and executes the command provided by the user.
      * @param input The raw input string from the user.
-     * @return true to continue the application, false to exit.
+     * @return Jimjam's response to the user input.
      * @throws JimjamException If the command is invalid or arguments are missing.
      */
     public String getResponse(String input) throws JimjamException {
