@@ -1,5 +1,7 @@
 package jimjam.ui;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import javafx.util.Duration;
+import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
 import jimjam.jimjam.Jimjam;
 
@@ -55,13 +59,27 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             response = jimjam.getResponse(input);
-        } catch (JimjamException exception) {
-            response = "Error: " + exception.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getJimjamDialog(response, dukeImage)
+            );
+        } catch (ExitException e) {
+            // Exit program if the user types bye
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getJimjamDialog(e.getMessage(), dukeImage)
+            );
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
+        } catch (JimjamException e) {
+            response = "Error: " + e.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getJimjamDialog(response, dukeImage)
+            );
         }
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getJimjamDialog(response, dukeImage)
-        );
         userInput.clear();
     }
 }
