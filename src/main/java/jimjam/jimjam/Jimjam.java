@@ -98,7 +98,7 @@ public class Jimjam {
             break;
 
         case UNMARK:
-            Task unmarked = this.tasks.updateTaskStatus(args, true);
+            Task unmarked = this.tasks.updateTaskStatus(args, false);
             this.ui.showUnmarkedTask(unmarked);
             break;
 
