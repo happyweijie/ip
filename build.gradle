@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClass.set("jimjam.jimjam.Jimjam")
+    mainClass.set("jimjam.ui.Launcher")
 }
 
 shadowJar {
