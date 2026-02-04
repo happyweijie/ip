@@ -1,5 +1,6 @@
 package jimjam.jimjam;
 
+import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
 import jimjam.storage.Storage;
 import jimjam.task.Task;
@@ -48,7 +49,7 @@ public class Jimjam {
 
         switch (command) {
         case BYE:
-            return this.ui.goodbyeMessage();
+            throw new ExitException(this.ui.goodbyeMessage());
 
         case LIST:
             return this.ui.taskListMessage(this.tasks);
