@@ -11,30 +11,20 @@ import java.util.List;
  * messages, task lists, and operation confirmations to the standard output.
  */
 public class Ui {
-	private static final String LOGO = "--jimjam";
-
-	/**
-	 * Prints a message to the console, followed by the Jimjam application logo.
-	 *
-	 * @param message The string to be displayed to the user.
-	 */
-	public void printMessage(String message) {
-		System.out.println(message + "\n" + LOGO);
-	}
 
 	/**
 	 * Displays the initial welcome greeting to the user when the application starts.
 	 */
-	public void showWelcome() {
-		printMessage("Hello from Jimjam!\n" +
-				"What can I do for you?");
+	public String welcomeMessage() {
+		return "Hello from Jimjam!\n" +
+				"What can I do for you?";
 	}
 
 	/**
 	 * Displays the exit message to the user.
 	 */
-	public void showGoodbye() {
-		printMessage("Bye. Hope to see you again soon!");
+	public String goodbyeMessage() {
+		return "Bye. Hope to see you again soon!";
 	}
 
 	/**
@@ -43,12 +33,14 @@ public class Ui {
 	 *
 	 * @param results The {@link TaskList} containing the search results.
 	 */
-	public void showSearchResults(TaskList results) {
+	public String searchResultsMessage(TaskList results) {
+		StringBuilder out = new StringBuilder();
 		if (results.getSize() > 0) {
-			System.out.println("Here are the matching tasks in your list:");
+			out.append("Here are the matching tasks in your list:\n");
 		}
 
-		showTaskList(results);
+		out.append(this.taskListMessage(results));
+		return out.toString();
 	}
 
 	/**
@@ -57,18 +49,21 @@ public class Ui {
 	 *
 	 * @param taskList The {@link TaskList} containing the tasks to be displayed.
 	 */
-	public void showTaskList(TaskList taskList) {
+	public String taskListMessage(TaskList taskList) {
 		// Handle empty taskList
 		if (taskList.getSize() == 0) {
-			printMessage("No tasks to show!");
-			return;
+			return "No matching tasks found!";
 		}
 
 		List<Task> tasks = taskList.getTasks();
+		StringBuilder out = new StringBuilder();
 		for (int i = 0; i < tasks.size(); i++) {
-			System.out.println((i + 1) + ": " + tasks.get(i));
+			out.append(String.format("%d: %s\n",
+					i + 1,
+					tasks.get(i)));
 		}
-		System.out.println(LOGO);
+
+		return out.toString().stripTrailing();
 	}
 
 	/**
@@ -77,9 +72,9 @@ public class Ui {
 	 * @param task The task that was added.
 	 * @param size The new total number of tasks in the list.
 	 */
-	public void showAdded(Task task, int size) {
-		printMessage("Got it. I've added:\n" + task + "\n" +
-				"Now you have " + size + " tasks.");
+	public String addTaskMessage(Task task, int size) {
+		return "Got it. I've added:\n" + task + "\n" +
+				"Now you have " + size + " tasks.";
 	}
 
 	/**
@@ -88,9 +83,9 @@ public class Ui {
 	 * @param task The task that was removed.
 	 * @param size The new total number of tasks remaining in the list.
 	 */
-	public void showDeleted(Task task, int size) {
-		printMessage("Got it. I've removed:\n" + task + "\n" +
-				"Now you have " + size + " tasks.");
+	public String deleteTaskMessage(Task task, int size) {
+		return "Got it. I've removed:\n" + task + "\n" +
+				"Now you have " + size + " tasks.";
 	}
 
 	/**
@@ -98,9 +93,9 @@ public class Ui {
 	 *
 	 * @param task The task that was marked done.
 	 */
-	public void showMarkedTask(Task task) {
-		printMessage("Nice! I've marked this task as done:\n" +
-				task);
+	public String markedTaskMessage(Task task) {
+		return "Nice! I've marked this task as done:\n" +
+				task;
 	}
 
 	/**
@@ -108,8 +103,8 @@ public class Ui {
 	 *
 	 * @param task The task that was unmarked.
 	 */
-	public void showUnmarkedTask(Task task) {
-		printMessage("OK, I've marked this task as not done yet:\n" +
-				task);
+	public String unmarkedTaskMessage(Task task) {
+		return "OK, I've marked this task as not done yet:\n" +
+				task;
 	}
 }

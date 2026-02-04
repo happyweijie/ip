@@ -47,7 +47,7 @@ public class Jimjam {
      * the "BYE" command is received.
      */
     public void run() {
-        this.ui.showWelcome();
+        System.out.println(this.ui.welcomeMessage());
 
         Scanner scanner = new Scanner(System.in);
 
@@ -59,14 +59,14 @@ public class Jimjam {
             try {
                 isRunning = handleCommand(input);
             } catch (Exception e) {
-                this.ui.printMessage(e.getMessage());
+                System.out.println(e.getMessage());
             }
 
             this.storage.save(this.tasks.getTasks());
         }
 
         scanner.close();
-        this.ui.showGoodbye();
+        System.out.println(this.ui.goodbyeMessage());
     }
 
     /**
@@ -89,42 +89,42 @@ public class Jimjam {
             return false;
 
         case LIST:
-            this.ui.showTaskList(this.tasks);
+            System.out.println(this.ui.taskListMessage(this.tasks));
             break;
 
         case MARK:
             Task marked = this.tasks.updateTaskStatus(args, true);
-            this.ui.showMarkedTask(marked);
+            System.out.println(this.ui.markedTaskMessage(marked));
             break;
 
         case UNMARK:
             Task unmarked = this.tasks.updateTaskStatus(args, true);
-            this.ui.showUnmarkedTask(unmarked);
+            System.out.println(this.ui.unmarkedTaskMessage(unmarked));
             break;
 
         case TODO:
             Task todo = this.tasks.addTodo(args);
-            this.ui.showAdded(todo, this.tasks.getSize());
+            System.out.println(this.ui.addTaskMessage(todo, this.tasks.getSize()));
             break;
 
         case DEADLINE:
             Task deadline = this.tasks.addDeadline(args);
-            this.ui.showAdded(deadline, this.tasks.getSize());
+            System.out.println(this.ui.addTaskMessage(deadline, this.tasks.getSize()));
             break;
 
         case EVENT:
             Task event = this.tasks.addEvent(args);
-            this.ui.showAdded(event, this.tasks.getSize());
+            System.out.println(this.ui.addTaskMessage(event, this.tasks.getSize()));
             break;
 
         case DELETE:
             Task deleted = this.tasks.deleteTask(args);
-            this.ui.showDeleted(deleted, this.tasks.getSize());
+            System.out.println(this.ui.deleteTaskMessage(deleted, this.tasks.getSize()));
             break;
 
 		case FIND:
 			TaskList res = this.tasks.searchTasks(args);
-			this.ui.showSearchResults(res);
+            System.out.println(this.ui.taskListMessage(res));
 			break;
 
         default:
