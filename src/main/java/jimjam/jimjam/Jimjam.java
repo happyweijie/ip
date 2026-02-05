@@ -8,9 +8,6 @@ import jimjam.task.TaskList;
 import jimjam.ui.Command;
 import jimjam.ui.Ui;
 
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * The main entry point for the Jimjam task management application.
  * This class coordinates the user interface, file storage, and task list logic
