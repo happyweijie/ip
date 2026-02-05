@@ -15,8 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * Represents a dialog box consisting of an image to represent the speaker
+ * and a text label containing the dialog content.
+ * <p>
+ * This component is backed by an FXML layout and is used to display
+ * user and Jimjam messages in the GUI.
+ * </p>
  */
 public class DialogBox extends HBox {
     @FXML
@@ -48,10 +52,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box representing a user message.
+     *
+     * @param text the dialog text
+     * @param img the user's display picture
+     * @return a dialog box styled for user input
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box representing a message from Jimjam.
+     *
+     * @param text the dialog text
+     * @param img Jimjam's display picture
+     * @return a dialog box styled for Jimjam responses
+     */
     public static DialogBox getJimjamDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -16,7 +16,11 @@ import jimjam.exception.JimjamException;
 import jimjam.jimjam.Jimjam;
 
 /**
- * Controller for the main GUI.
+ * Controller for the main GUI window.
+ * <p>
+ * Handles user interactions, displays dialog boxes, and coordinates
+ * communication between the UI and the {@link Jimjam} logic.
+ * </p>
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -38,7 +42,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Jimjam instance */
+    /**
+     * Injects the {@link Jimjam} instance into the controller and
+     * displays the welcome message.
+     *
+     * @param jimjam the Jimjam logic component
+     */
     public void setJimjam(Jimjam jimjam) {
         this.jimjam = jimjam;
 
@@ -49,10 +58,6 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Jimjam's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().strip();
