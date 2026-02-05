@@ -47,45 +47,59 @@ public class Jimjam {
         // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
 
+        String response;
         switch (command) {
         case BYE:
             throw new ExitException(this.ui.goodbyeMessage());
 
         case LIST:
-            return this.ui.taskListMessage(this.tasks);
+            response = this.ui.taskListMessage(this.tasks);
+            break;
 
         case MARK:
             Task marked = this.tasks.updateTaskStatus(args, true);
-            return this.ui.markedTaskMessage(marked);
+            response = this.ui.markedTaskMessage(marked);
+            break;
 
         case UNMARK:
             Task unmarked = this.tasks.updateTaskStatus(args, false);
-            return this.ui.unmarkedTaskMessage(unmarked);
+            response = this.ui.unmarkedTaskMessage(unmarked);
+            break;
 
         case TODO:
             Task todo = this.tasks.addTodo(args);
-            return this.ui.addTaskMessage(todo, this.tasks.getSize());
+            response = this.ui.addTaskMessage(todo, this.tasks.getSize());
+            break;
 
         case DEADLINE:
             Task deadline = this.tasks.addDeadline(args);
-            return this.ui.addTaskMessage(deadline, this.tasks.getSize());
+            response = this.ui.addTaskMessage(deadline, this.tasks.getSize());
+            break;
 
         case EVENT:
             Task event = this.tasks.addEvent(args);
-            return this.ui.addTaskMessage(event, this.tasks.getSize());
+            response = this.ui.addTaskMessage(event, this.tasks.getSize());
+            break;
 
         case DELETE:
             Task deleted = this.tasks.deleteTask(args);
-            return this.ui.deleteTaskMessage(deleted, this.tasks.getSize());
+            response = this.ui.deleteTaskMessage(deleted, this.tasks.getSize());
+            break;
 
         case FIND:
             TaskList res = this.tasks.searchTasks(args);
-            return this.ui.searchResultsMessage(res);
+            response = this.ui.searchResultsMessage(res);
+            break;
 
         default:
             // Unknown command
             throw new JimjamException("I don't recognise this command.");
         }
+
+        // write task list to storage
+        this.storage.save(this.tasks.getTasks());
+        // return response
+        return response;
     }
 
     /**
