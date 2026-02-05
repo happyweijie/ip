@@ -19,7 +19,7 @@ public class Jimjam {
 
     private final Ui ui;
     private final Storage storage;
-    private final TaskList tasks;
+    private final TaskList taskList;
 
     /**
      * Initializes the Jimjam application components.
@@ -28,7 +28,7 @@ public class Jimjam {
     public Jimjam() {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
-        this.tasks = new TaskList(storage.load());
+        this.taskList = new TaskList(storage.load());
     }
 
     /**
@@ -50,41 +50,41 @@ public class Jimjam {
             throw new ExitException(this.ui.goodbyeMessage());
 
         case LIST:
-            response = this.ui.taskListMessage(this.tasks);
+            response = this.ui.taskListMessage(this.taskList);
             break;
 
         case MARK:
-            Task marked = this.tasks.updateTaskStatus(args, true);
+            Task marked = this.taskList.updateTaskStatus(args, true);
             response = this.ui.markedTaskMessage(marked);
             break;
 
         case UNMARK:
-            Task unmarked = this.tasks.updateTaskStatus(args, false);
+            Task unmarked = this.taskList.updateTaskStatus(args, false);
             response = this.ui.unmarkedTaskMessage(unmarked);
             break;
 
         case TODO:
-            Task todo = this.tasks.addTodo(args);
-            response = this.ui.addTaskMessage(todo, this.tasks.getSize());
+            Task todo = this.taskList.addTodo(args);
+            response = this.ui.addTaskMessage(todo, this.taskList.getSize());
             break;
 
         case DEADLINE:
-            Task deadline = this.tasks.addDeadline(args);
-            response = this.ui.addTaskMessage(deadline, this.tasks.getSize());
+            Task deadline = this.taskList.addDeadline(args);
+            response = this.ui.addTaskMessage(deadline, this.taskList.getSize());
             break;
 
         case EVENT:
-            Task event = this.tasks.addEvent(args);
-            response = this.ui.addTaskMessage(event, this.tasks.getSize());
+            Task event = this.taskList.addEvent(args);
+            response = this.ui.addTaskMessage(event, this.taskList.getSize());
             break;
 
         case DELETE:
-            Task deleted = this.tasks.deleteTask(args);
-            response = this.ui.deleteTaskMessage(deleted, this.tasks.getSize());
+            Task deleted = this.taskList.deleteTask(args);
+            response = this.ui.deleteTaskMessage(deleted, this.taskList.getSize());
             break;
 
         case FIND:
-            TaskList res = this.tasks.searchTasks(args);
+            TaskList res = this.taskList.searchTasks(args);
             response = this.ui.searchResultsMessage(res);
             break;
 
@@ -94,7 +94,7 @@ public class Jimjam {
         }
 
         // write task list to storage
-        this.storage.save(this.tasks.getTasks());
+        this.storage.save(this.taskList.getTasks());
         // return response
         return response;
     }
