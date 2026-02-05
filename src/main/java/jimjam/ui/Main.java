@@ -11,7 +11,13 @@ import javafx.stage.Stage;
 import jimjam.jimjam.Jimjam;
 
 /**
- * A GUI for Duke using FXML.
+ * The main GUI entry point for Jimjam.
+ * <p>
+ * This class initializes and launches the JavaFX user interface using FXML.
+ * It loads the main window layout from {@code MainWindow.fxml}, sets up the
+ * primary stage and scene, and injects the {@link Jimjam} instance into the
+ * {@link MainWindow} controller.
+ * </p>
  */
 public class Main extends Application {
 
