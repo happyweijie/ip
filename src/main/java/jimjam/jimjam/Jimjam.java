@@ -102,7 +102,7 @@ public class Jimjam {
     /**
      * Returns Jimjam's welcome message to the user
      *
-     * @return Jimjam's welcome message
+     * @return The welcome message.
      */
     public String getWelcomeMessage() {
         return this.ui.welcomeMessage();
