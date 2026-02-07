@@ -65,13 +65,13 @@ public class Parser {
 	public static String taskToFileLine(Task t) {
 		String status = t.isDone() ? "1" : "0";
 		String type = t.getIcon(); // Assuming "T", "D", or "E"
-		String base = type + " | " + status + " | " + t.getDescription();
+		String storageFormat = type + " | " + status + " | " + t.getDescription();
 
 		if (t instanceof Deadline d) {
-			return base + " | " + d.getBy();
+			return storageFormat + " | " + d.getBy();
 		} else if (t instanceof Event e) {
-			return base + " | " + e.getStart() + " | " + e.getEnd();
+			return storageFormat + " | " + e.getStart() + " | " + e.getEnd();
 		}
-		return base;
+		return storageFormat;
 	}
 }
