@@ -47,7 +47,7 @@ public class Jimjam {
         // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
 
-        String response;
+        String response = "";
         switch (command) {
         case BYE:
             throw new ExitException(this.ui.goodbyeMessage());
