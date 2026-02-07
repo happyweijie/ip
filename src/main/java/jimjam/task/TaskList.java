@@ -138,7 +138,7 @@ public class TaskList {
 	 * @param substring The search term to look for within task descriptions.
 	 * @return A new {@link TaskList} containing only the tasks that match the search criteria.
 	 */
-	public TaskList searchTasks(String substring) {
+	public TaskList searchTask(String substring) {
 		List<Task> res = this.tasks.stream()
 				.filter(task -> task.getDescription()
 						.toLowerCase()

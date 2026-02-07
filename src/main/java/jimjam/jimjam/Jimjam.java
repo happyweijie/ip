@@ -84,7 +84,7 @@ public class Jimjam {
             break;
 
         case FIND:
-            TaskList res = this.taskList.searchTasks(args);
+            TaskList res = this.taskList.searchTask(args);
             response = this.ui.searchResultsMessage(res);
             break;
 
