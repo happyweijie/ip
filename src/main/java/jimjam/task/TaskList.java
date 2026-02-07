@@ -71,9 +71,9 @@ public class TaskList {
 			throw new JimjamException("jimjam.tasks.Deadline must include /by.");
 		}
 
-		String[] split = args.split(" /by ", 2);
-		String description = split[0];
-		LocalDate by = Parser.parseDate(split[1]);
+		String[] parts = args.split(" /by ", 2);
+		String description = parts[0];
+		LocalDate by = Parser.parseDate(parts[1]);
 
 		return this.addTask(new Deadline(description, by));
 	}
@@ -93,11 +93,11 @@ public class TaskList {
 			throw new JimjamException("jimjam.tasks.Event must include /from and /to.");
 		}
 
-		String[] split = args.split(" /from | /to ", 3);
+		String[] parts = args.split(" /from | /to ", 3);
 
-		String description = split[0];
-		LocalDate start = Parser.parseDate(split[1]);
-		LocalDate end = Parser.parseDate(split[2]);;
+		String description = parts[0];
+		LocalDate start = Parser.parseDate(parts[1]);
+		LocalDate end = Parser.parseDate(parts[2]);;
 		return this.addTask(new Event(description, start, end));
 	}
 
