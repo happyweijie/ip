@@ -2,9 +2,12 @@ package jimjam.jimjam;
 
 import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
+
 import jimjam.storage.Storage;
+
 import jimjam.task.Task;
 import jimjam.task.TaskList;
+
 import jimjam.ui.Command;
 import jimjam.ui.Ui;
 
@@ -44,7 +47,7 @@ public class Jimjam {
         // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
 
-        String response;
+        String response = "";
         switch (command) {
         case BYE:
             throw new ExitException(this.ui.goodbyeMessage());
