@@ -127,6 +127,9 @@ public class TaskList {
 		// zero-index task number
 		index -= 1;
 		this.validateIndex(index);
+
+		assert this.tasks.get(index) != null : "Task must exist.";
+
 		return tasks.remove(index);
 	}
 
@@ -188,6 +191,8 @@ public class TaskList {
 		if (index < 0 || index >= tasks.size()) {
 			throw new JimjamException("Invalid task index.");
 		}
+
+		assert index > 0 && index < this.getSize(): "Index must be > 0 and < " + this.getSize();
 	}
 
 	public List<Task> getTasks() {
