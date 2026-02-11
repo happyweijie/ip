@@ -37,7 +37,12 @@ public class TaskList {
 	 * @return The task that was added
 	 */
 	protected Task addTask(Task task) {
+        int oldSize = this.getSize();
+
 		this.tasks.add(task);
+
+        assert this.getSize() == oldSize + 1 : "Task list size did not increase";
+
 		return task;
 	}
 
@@ -128,9 +133,13 @@ public class TaskList {
 		index -= 1;
 		this.validateIndex(index);
 
-		assert this.tasks.get(index) != null : "Task must exist.";
+        int oldSize = this.getSize();
 
-		return tasks.remove(index);
+        Task deleted = tasks.remove(index);
+
+        assert this.getSize() == oldSize - 1 : "Task list size did not decrease";
+
+		return deleted;
 	}
 
 	/**
