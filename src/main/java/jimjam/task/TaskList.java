@@ -3,9 +3,9 @@ package jimjam.task;
 import jimjam.exception.JimjamException;
 import jimjam.parser.Parser;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
 
 /**
  * Manages a list of tasks and provides operations to add, delete,
@@ -37,7 +37,12 @@ public class TaskList {
 	 * @return The task that was added
 	 */
 	protected Task addTask(Task task) {
+        int oldSize = this.getSize();
+
 		this.tasks.add(task);
+
+        assert this.getSize() == oldSize + 1 : "Task list size did not increase";
+
 		return task;
 	}
 
@@ -127,7 +132,14 @@ public class TaskList {
 		// zero-index task number
 		index -= 1;
 		this.validateIndex(index);
-		return tasks.remove(index);
+
+        int oldSize = this.getSize();
+
+        Task deleted = tasks.remove(index);
+
+        assert this.getSize() == oldSize - 1 : "Task list size did not decrease";
+
+		return deleted;
 	}
 
 	/**
@@ -189,6 +201,8 @@ public class TaskList {
 		if (index < 0 || index >= tasks.size()) {
 			throw new JimjamException("Invalid task index.");
 		}
+
+		assert index > 0 && index < this.getSize(): "Index must be > 0 and < " + this.getSize();
 	}
 
 	public List<Task> getTasks() {

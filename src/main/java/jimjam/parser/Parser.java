@@ -6,8 +6,8 @@ import jimjam.task.Event;
 import jimjam.task.Task;
 import jimjam.task.Todo;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * Translates between raw strings (from user input or files) and Task objects.

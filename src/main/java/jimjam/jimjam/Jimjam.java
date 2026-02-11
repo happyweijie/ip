@@ -2,9 +2,12 @@ package jimjam.jimjam;
 
 import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
+
 import jimjam.storage.Storage;
+
 import jimjam.task.Task;
 import jimjam.task.TaskList;
+
 import jimjam.ui.Command;
 import jimjam.ui.Ui;
 
@@ -29,6 +32,8 @@ public class Jimjam {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
         this.taskList = new TaskList(storage.load());
+
+        assert this.taskList.getSize() >= 0 : "list size cannot be negative.";
     }
 
     /**
