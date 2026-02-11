@@ -52,45 +52,48 @@ public class Jimjam {
 
     private String executeCommand(Command command, String args)
             throws JimjamException {
-        switch (command) {
-        case BYE:
-            throw new ExitException(this.ui.goodbyeMessage());
+        return switch (command) {
+        case BYE -> throw new ExitException(this.ui.goodbyeMessage());
 
-        case LIST:
-            return this.ui.taskListMessage(this.taskList);
+        case LIST -> this.ui.taskListMessage(this.taskList);
 
-        case MARK:
+        case MARK -> {
             Task marked = this.taskList.updateTaskStatus(args, true);
-            return this.ui.markedTaskMessage(marked);
-
-        case UNMARK:
-            Task unmarked = this.taskList.updateTaskStatus(args, false);
-            return this.ui.unmarkedTaskMessage(unmarked);
-
-        case TODO:
-            Task todo = this.taskList.addTodo(args);
-            return this.ui.addTaskMessage(todo, this.taskList.getSize());
-
-        case DEADLINE:
-            Task deadline = this.taskList.addDeadline(args);
-            return this.ui.addTaskMessage(deadline, this.taskList.getSize());
-
-        case EVENT:
-            Task event = this.taskList.addEvent(args);
-            return this.ui.addTaskMessage(event, this.taskList.getSize());
-
-        case DELETE:
-            Task deleted = this.taskList.deleteTask(args);
-            return this.ui.deleteTaskMessage(deleted, this.taskList.getSize());
-
-        case FIND:
-            TaskList res = this.taskList.searchTask(args);
-            return this.ui.searchResultsMessage(res);
-
-        default:
-            // Unknown command
-            throw new JimjamException("I don't recognise this command.");
+            yield this.ui.markedTaskMessage(marked);
         }
+
+        case UNMARK -> {
+            Task unmarked = this.taskList.updateTaskStatus(args, false);
+            yield this.ui.unmarkedTaskMessage(unmarked);
+        }
+
+        case TODO -> {
+            Task todo = this.taskList.addTodo(args);
+            yield this.ui.addTaskMessage(todo, this.taskList.getSize());
+        }
+
+        case DEADLINE -> {
+            Task deadline = this.taskList.addDeadline(args);
+            yield this.ui.addTaskMessage(deadline, this.taskList.getSize());
+        }
+
+        case EVENT -> {
+            Task event = this.taskList.addEvent(args);
+            yield this.ui.addTaskMessage(event, this.taskList.getSize());
+        }
+
+        case DELETE -> {
+            Task deleted = this.taskList.deleteTask(args);
+            yield this.ui.deleteTaskMessage(deleted, this.taskList.getSize());
+        }
+
+        case FIND -> {
+            TaskList res = this.taskList.searchTask(args);
+            yield this.ui.searchResultsMessage(res);
+        }
+
+        default -> throw new JimjamException("I don't recognise this command.");
+        };
     }
 
     /**
