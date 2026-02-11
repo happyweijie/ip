@@ -144,6 +144,7 @@ public class TaskList {
 						.toLowerCase()
 						.contains(substring.toLowerCase()))
 				.toList();
+
 		return new TaskList(res);
 	}
 
