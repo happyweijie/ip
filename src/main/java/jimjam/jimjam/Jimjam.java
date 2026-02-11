@@ -39,7 +39,6 @@ public class Jimjam {
      */
     public String getResponse(String input) throws JimjamException {
         String[] parts = input.split(" ", 2);
-        // get command
         Command command = Command.fromString(parts[0]);
         // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
@@ -48,7 +47,6 @@ public class Jimjam {
 
         // write task list to storage
         this.storage.save(this.taskList.getTasks());
-        // return response
         return response;
     }
 
