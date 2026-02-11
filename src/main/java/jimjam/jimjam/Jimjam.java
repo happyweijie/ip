@@ -57,15 +57,9 @@ public class Jimjam {
 
         case LIST -> this.ui.taskListMessage(this.taskList);
 
-        case MARK -> {
-            Task marked = this.taskList.updateTaskStatus(args, true);
-            yield this.ui.markedTaskMessage(marked);
-        }
+        case MARK -> this.handleMark(args);
 
-        case UNMARK -> {
-            Task unmarked = this.taskList.updateTaskStatus(args, false);
-            yield this.ui.unmarkedTaskMessage(unmarked);
-        }
+        case UNMARK -> this.handleUnmark(args);
 
         case TODO -> {
             Task todo = this.taskList.addTodo(args);
@@ -94,6 +88,16 @@ public class Jimjam {
 
         default -> throw new JimjamException("I don't recognise this command.");
         };
+    }
+
+    private String handleMark(String args) throws JimjamException {
+        Task marked = this.taskList.updateTaskStatus(args, true);
+        return this.ui.markedTaskMessage(marked);
+    }
+
+    private String handleUnmark(String args) throws JimjamException {
+        Task unmarked = this.taskList.updateTaskStatus(args, false);
+        return this.ui.unmarkedTaskMessage(unmarked);
     }
 
     /**
