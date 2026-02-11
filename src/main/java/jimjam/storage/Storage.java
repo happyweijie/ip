@@ -49,17 +49,19 @@ public class Storage {
 				String line = scanner.nextLine();
 				try {
 					Task task = Parser.parseFileLine(line);
-					if (task != null) {
-						tasks.add(task);
+					if (task == null) {
+						continue;
 					}
+
+					tasks.add(task);
 				} catch (Exception e) {
-					// Stretch Goal: Handle corrupted lines
 					System.out.println("Skipping corrupted line: " + line);
 				}
 			}
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
 		}
+
 		return tasks;
 	}
 
