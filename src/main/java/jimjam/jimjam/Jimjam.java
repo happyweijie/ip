@@ -32,6 +32,8 @@ public class Jimjam {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
         this.tasks = new TaskList(storage.load());
+
+        assert this.tasks.getSize() >= 0 : "list size cannot be negative.";
     }
 
     /**
