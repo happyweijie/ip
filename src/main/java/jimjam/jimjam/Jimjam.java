@@ -22,7 +22,7 @@ public class Jimjam {
 
     private final Ui ui;
     private final Storage storage;
-    private final TaskList tasks;
+    private final TaskList taskList;
 
     /**
      * Initializes the Jimjam application components.
@@ -31,9 +31,9 @@ public class Jimjam {
     public Jimjam() {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
-        this.tasks = new TaskList(storage.load());
+        this.taskList = new TaskList(storage.load());
 
-        assert this.tasks.getSize() >= 0 : "list size cannot be negative.";
+        assert this.taskList.getSize() >= 0 : "list size cannot be negative.";
     }
 
     /**
@@ -44,64 +44,75 @@ public class Jimjam {
      */
     public String getResponse(String input) throws JimjamException {
         String[] parts = input.split(" ", 2);
-        // get command
         Command command = Command.fromString(parts[0]);
         // additional argument if present
         String args = parts.length > 1 ? parts[1] : "";
 
-        String response = "";
-        switch (command) {
-        case BYE:
-            throw new ExitException(this.ui.goodbyeMessage());
-
-        case LIST:
-            response = this.ui.taskListMessage(this.tasks);
-            break;
-
-        case MARK:
-            Task marked = this.tasks.updateTaskStatus(args, true);
-            response = this.ui.markedTaskMessage(marked);
-            break;
-
-        case UNMARK:
-            Task unmarked = this.tasks.updateTaskStatus(args, false);
-            response = this.ui.unmarkedTaskMessage(unmarked);
-            break;
-
-        case TODO:
-            Task todo = this.tasks.addTodo(args);
-            response = this.ui.addTaskMessage(todo, this.tasks.getSize());
-            break;
-
-        case DEADLINE:
-            Task deadline = this.tasks.addDeadline(args);
-            response = this.ui.addTaskMessage(deadline, this.tasks.getSize());
-            break;
-
-        case EVENT:
-            Task event = this.tasks.addEvent(args);
-            response = this.ui.addTaskMessage(event, this.tasks.getSize());
-            break;
-
-        case DELETE:
-            Task deleted = this.tasks.deleteTask(args);
-            response = this.ui.deleteTaskMessage(deleted, this.tasks.getSize());
-            break;
-
-        case FIND:
-            TaskList res = this.tasks.searchTasks(args);
-            response = this.ui.searchResultsMessage(res);
-            break;
-
-        default:
-            // Unknown command
-            throw new JimjamException("I don't recognise this command.");
-        }
+        String response = this.executeCommand(command, args);
 
         // write task list to storage
-        this.storage.save(this.tasks.getTasks());
-        // return response
+        this.storage.save(this.taskList.getTasks());
         return response;
+    }
+
+    private String executeCommand(Command command, String args)
+            throws JimjamException {
+        return switch (command) {
+        case BYE -> throw new ExitException(this.ui.goodbyeMessage());
+
+        case LIST -> this.ui.taskListMessage(this.taskList);
+
+        case MARK -> this.handleMark(args);
+
+        case UNMARK -> this.handleUnmark(args);
+
+        case TODO -> this.handleTodo(args);
+
+        case DEADLINE -> this.handleDeadline(args);
+
+        case EVENT -> this.handleEvent(args);
+
+        case DELETE -> this.handleDelete(args);
+
+        case FIND -> this.handleFind(args);
+
+        default -> throw new JimjamException("I don't recognise this command.");
+        };
+    }
+
+    private String handleMark(String args) throws JimjamException {
+        Task marked = this.taskList.updateTaskStatus(args, true);
+        return this.ui.markedTaskMessage(marked);
+    }
+
+    private String handleUnmark(String args) throws JimjamException {
+        Task unmarked = this.taskList.updateTaskStatus(args, false);
+        return this.ui.unmarkedTaskMessage(unmarked);
+    }
+
+    private String handleTodo(String args) throws JimjamException {
+        Task todo = taskList.addTodo(args);
+        return ui.addTaskMessage(todo, taskList.getSize());
+    }
+
+    private String handleDeadline(String args) throws JimjamException {
+        Task deadline = taskList.addDeadline(args);
+        return ui.addTaskMessage(deadline, taskList.getSize());
+    }
+
+    private String handleEvent(String args) throws JimjamException {
+        Task event = taskList.addEvent(args);
+        return ui.addTaskMessage(event, taskList.getSize());
+    }
+
+    private String handleDelete(String args) throws JimjamException {
+        Task deleted = taskList.deleteTask(args);
+        return ui.deleteTaskMessage(deleted, taskList.getSize());
+    }
+
+    private String handleFind(String args) throws JimjamException {
+        TaskList result = taskList.searchTask(args);
+        return ui.searchResultsMessage(result);
     }
 
     /**
