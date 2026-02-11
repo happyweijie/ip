@@ -201,8 +201,6 @@ public class TaskList {
 		if (index < 0 || index >= tasks.size()) {
 			throw new JimjamException("Invalid task index.");
 		}
-
-		assert index > 0 && index < this.getSize(): "Index must be > 0 and < " + this.getSize();
 	}
 
 	public List<Task> getTasks() {
