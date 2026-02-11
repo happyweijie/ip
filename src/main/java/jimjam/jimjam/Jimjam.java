@@ -67,15 +67,9 @@ public class Jimjam {
 
         case EVENT -> this.handleEvent(args);
 
-        case DELETE -> {
-            Task deleted = this.taskList.deleteTask(args);
-            yield this.ui.deleteTaskMessage(deleted, this.taskList.getSize());
-        }
+        case DELETE -> this.handleDelete(args);
 
-        case FIND -> {
-            TaskList res = this.taskList.searchTask(args);
-            yield this.ui.searchResultsMessage(res);
-        }
+        case FIND -> this.handleFind(args);
 
         default -> throw new JimjamException("I don't recognise this command.");
         };
@@ -104,6 +98,16 @@ public class Jimjam {
     private String handleEvent(String args) throws JimjamException {
         Task event = taskList.addEvent(args);
         return ui.addTaskMessage(event, taskList.getSize());
+    }
+
+    private String handleDelete(String args) throws JimjamException {
+        Task deleted = taskList.deleteTask(args);
+        return ui.deleteTaskMessage(deleted, taskList.getSize());
+    }
+
+    private String handleFind(String args) throws JimjamException {
+        TaskList result = taskList.searchTask(args);
+        return ui.searchResultsMessage(result);
     }
 
     /**
