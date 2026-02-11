@@ -61,20 +61,11 @@ public class Jimjam {
 
         case UNMARK -> this.handleUnmark(args);
 
-        case TODO -> {
-            Task todo = this.taskList.addTodo(args);
-            yield this.ui.addTaskMessage(todo, this.taskList.getSize());
-        }
+        case TODO -> this.handleTodo(args);
 
-        case DEADLINE -> {
-            Task deadline = this.taskList.addDeadline(args);
-            yield this.ui.addTaskMessage(deadline, this.taskList.getSize());
-        }
+        case DEADLINE -> this.handleDeadline(args);
 
-        case EVENT -> {
-            Task event = this.taskList.addEvent(args);
-            yield this.ui.addTaskMessage(event, this.taskList.getSize());
-        }
+        case EVENT -> this.handleEvent(args);
 
         case DELETE -> {
             Task deleted = this.taskList.deleteTask(args);
@@ -98,6 +89,21 @@ public class Jimjam {
     private String handleUnmark(String args) throws JimjamException {
         Task unmarked = this.taskList.updateTaskStatus(args, false);
         return this.ui.unmarkedTaskMessage(unmarked);
+    }
+
+    private String handleTodo(String args) throws JimjamException {
+        Task todo = taskList.addTodo(args);
+        return ui.addTaskMessage(todo, taskList.getSize());
+    }
+
+    private String handleDeadline(String args) throws JimjamException {
+        Task deadline = taskList.addDeadline(args);
+        return ui.addTaskMessage(deadline, taskList.getSize());
+    }
+
+    private String handleEvent(String args) throws JimjamException {
+        Task event = taskList.addEvent(args);
+        return ui.addTaskMessage(event, taskList.getSize());
     }
 
     /**
