@@ -3,6 +3,7 @@ package jimjam.task;
 import jimjam.exception.JimjamException;
 import jimjam.parser.Parser;
 
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -195,6 +196,31 @@ public class TaskList {
 		t.setDone(isDone);
 
 		return t;
+	}
+
+	public TaskList getTasksDueWithin(int n) throws JimjamException {
+		if (n < 0) {
+			throw new JimjamException("Reminder days should not be negative");
+		}
+
+		List<Task> res = new ArrayList<>();
+		LocalDate today = LocalDate.now();
+
+		for (Task t : this.tasks) {
+			if (t.getRelevantDate().isEmpty()) {
+				continue;
+			}
+
+			long days = t.getRelevantDate()
+					.map(date -> ChronoUnit.DAYS.between(today, date))
+					.orElse(0L);
+
+			if (days <= n) {
+				res.add(t);
+			}
+		}
+
+		return new TaskList(res);
 	}
 
 	private void validateIndex(int index) throws JimjamException {
