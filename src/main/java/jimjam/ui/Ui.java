@@ -48,6 +48,16 @@ public class Ui {
 		return out.toString();
 	}
 
+	public String remindersMessage(TaskList results) {
+		StringBuilder out = new StringBuilder();
+		if (results.getSize() > 0) {
+			out.append("Here are your reminders:\n");
+		}
+
+		out.append(this.taskListMessage(results));
+		return out.toString();
+	}
+
 	/**
 	 * Returns a String representation of the tasks currently in the provided task list.
 	 * If the list is empty, a notification String will be returned instead.

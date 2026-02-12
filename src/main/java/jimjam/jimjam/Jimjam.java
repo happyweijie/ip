@@ -76,6 +76,8 @@ public class Jimjam {
 
         case FIND -> this.handleFind(args);
 
+        case REMIND -> this.handleRemind(args);
+
         default -> throw new JimjamException("I don't recognise this command.");
         };
     }
@@ -113,6 +115,11 @@ public class Jimjam {
     private String handleFind(String args) throws JimjamException {
         TaskList result = taskList.searchTask(args);
         return ui.searchResultsMessage(result);
+    }
+
+    private String handleRemind(String args) throws JimjamException {
+        TaskList reminders = taskList.getTasksDueWithin(args);
+        return ui.remindersMessage(reminders);
     }
 
     /**

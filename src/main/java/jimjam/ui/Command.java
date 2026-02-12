@@ -24,7 +24,10 @@ public enum Command {
     /** Removes a task from the list. */
     DELETE,
     /** Search for tasks containing a query as substring */
-    FIND;
+    FIND,
+    /** Search for upcoming tasks */
+    REMIND;
+
 
 
     /**
