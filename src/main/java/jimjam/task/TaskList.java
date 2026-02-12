@@ -211,7 +211,7 @@ public class TaskList {
 	 */
 	public TaskList getTasksDueWithin(String args) throws JimjamException {
 		if  (args.isBlank()) {
-			throw new JimjamException("Please specify number of days, n.");
+			throw new JimjamException("Please specify number of days from today.");
 		}
 
 		try {
@@ -229,12 +229,12 @@ public class TaskList {
 	 * <p>Only tasks with a non-empty relevant date are considered.
 	 * Tasks without an associated date are ignored.</p>
 	 *
-	 * @param n the number of days from today (must be non-negative)
+	 * @param numDays the number of days from today (must be non-negative)
 	 * @return a {@code TaskList} containing tasks due within {@code n} days
 	 * @throws JimjamException if {@code n} is negative
 	 */
-	public TaskList getTasksDueWithin(int n) throws JimjamException {
-		if (n < 0) {
+	public TaskList getTasksDueWithin(int numDays) throws JimjamException {
+		if (numDays < 0) {
 			throw new JimjamException("Reminder days should not be negative");
 		}
 
@@ -247,7 +247,7 @@ public class TaskList {
 					long daysTil = t.getRelevantDate()
 							.map(date -> ChronoUnit.DAYS.between(today, date))
 							.orElse(0L);
-					return daysTil <= n;
+					return daysTil <= numDays;
 				})
 				.toList();
 
