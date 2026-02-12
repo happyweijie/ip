@@ -198,6 +198,19 @@ public class TaskList {
 		return t;
 	}
 
+	public TaskList getTasksDueWithin(String args) throws JimjamException {
+		if  (args.isBlank()) {
+			throw new JimjamException("Please specify number of days, n.");
+		}
+
+		try {
+			int n = Integer.parseInt(args);
+			return this.getTasksDueWithin(n);
+		} catch (Exception e) {
+			throw new JimjamException("Please an integer for number of days.");
+		}
+	}
+
 	public TaskList getTasksDueWithin(int n) throws JimjamException {
 		if (n < 0) {
 			throw new JimjamException("Reminder days should not be negative");
