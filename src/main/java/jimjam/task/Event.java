@@ -2,6 +2,7 @@ package jimjam.task;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Represents an event task that has a description, start date and end date.
@@ -48,6 +49,11 @@ public class Event extends Task  {
     @Override
     public String getIcon() {
         return "E";
+    }
+
+    @Override
+    public Optional<LocalDate> getRelevantDate() {
+        return Optional.of(this.getStart());
     }
 
     public LocalDate getStart() {

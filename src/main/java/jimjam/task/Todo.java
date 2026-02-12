@@ -1,5 +1,8 @@
 package jimjam.task;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 /**
  * Represents a to-do task that has a description and no associated date or time.
  * A to-do task can be marked as completed or incomplete.
@@ -29,6 +32,11 @@ public class Todo extends Task {
     @Override
     public String getIcon() {
         return "T";
+    }
+
+    @Override
+    public Optional<LocalDate> getRelevantDate() {
+        return Optional.empty();
     }
 
     @Override

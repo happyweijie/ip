@@ -2,6 +2,7 @@ package jimjam.task;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Represents a deadline task that has a description and a deadline date.
@@ -43,6 +44,11 @@ public class Deadline extends Task {
     @Override
     public String getIcon() {
         return "D";
+    }
+
+    @Override
+    public Optional<LocalDate> getRelevantDate() {
+        return Optional.of(this.getBy());
     }
 
     public LocalDate getBy() {

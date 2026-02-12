@@ -1,5 +1,8 @@
 package jimjam.task;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 /**
  * Represents a generic task in the JimJam application.
  * This is an abstract base class that encapsulates a description and a completion status.
@@ -48,6 +51,21 @@ public abstract class Task {
      * @return A String representation of the Task icon.
      */
     public abstract String getIcon();
+
+    /**
+     * Returns the date relevant for time-based operations such as reminders.
+     *
+     * <p>For example:
+     * <ul>
+     *   <li>Deadline returns its due date</li>
+     *   <li>Event returns its start date</li>
+     *   <li>Tasks without a date return {@code Optional.empty()}</li>
+     * </ul>
+     *
+     * @return an {@code Optional} containing the relevant {@code LocalDate},
+     * or {@code Optional.empty()} if the task has no associated date
+     */
+    public abstract Optional<LocalDate> getRelevantDate();
 
     public String getDescription() {
         return description;
