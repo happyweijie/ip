@@ -224,7 +224,7 @@ public class TaskList {
 
 	/**
 	 * Returns a {@code TaskList} containing tasks whose relevant date
-	 * falls within {@code n} days from today (inclusive).
+	 * falls within {@code n} days from today inclusive.
 	 *
 	 * <p>Only tasks with a non-empty relevant date are considered.
 	 * Tasks without an associated date are ignored.</p>
