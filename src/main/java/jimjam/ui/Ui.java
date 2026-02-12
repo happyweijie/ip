@@ -48,13 +48,20 @@ public class Ui {
 		return out.toString();
 	}
 
-	public String remindersMessage(TaskList results) {
+	/**
+	 * Returns a String representation of tasks in the reminders.
+	 * If the list is empty, a notification String will be returned instead.
+	 *
+	 * @param reminders The {@link TaskList} containing the reminders.
+	 * @return The reminders displayed as a String.
+	 */
+	public String remindersMessage(TaskList reminders) {
 		StringBuilder out = new StringBuilder();
-		if (results.getSize() > 0) {
+		if (reminders.getSize() > 0) {
 			out.append("Here are your reminders:\n");
 		}
 
-		out.append(this.taskListMessage(results));
+		out.append(this.taskListMessage(reminders));
 		return out.toString();
 	}
 
