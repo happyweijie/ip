@@ -206,7 +206,7 @@ public class TaskList {
 		try {
 			int n = Integer.parseInt(args);
 			return this.getTasksDueWithin(n);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			throw new JimjamException("Please an integer for number of days.");
 		}
 	}
