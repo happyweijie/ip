@@ -198,6 +198,17 @@ public class TaskList {
 		return t;
 	}
 
+	/**
+	 * Returns a {@code TaskList} containing tasks due within the specified number of days.
+	 *
+	 * <p>The given argument is expected to be a non-blank string representation
+	 * of a non-negative integer. The integer value represents the number of days
+	 * from today (inclusive) within which tasks should be returned.</p>
+	 *
+	 * @param args a non-blank string representing the number of days
+	 * @return a {@code TaskList} containing tasks due within the specified number of days
+	 * @throws JimjamException if {@code args} is blank or not a valid integer
+	 */
 	public TaskList getTasksDueWithin(String args) throws JimjamException {
 		if  (args.isBlank()) {
 			throw new JimjamException("Please specify number of days, n.");
@@ -211,6 +222,17 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Returns a {@code TaskList} containing tasks whose relevant date
+	 * falls within {@code n} days from today (inclusive).
+	 *
+	 * <p>Only tasks with a non-empty relevant date are considered.
+	 * Tasks without an associated date are ignored.</p>
+	 *
+	 * @param n the number of days from today (must be non-negative)
+	 * @return a {@code TaskList} containing tasks due within {@code n} days
+	 * @throws JimjamException if {@code n} is negative
+	 */
 	public TaskList getTasksDueWithin(int n) throws JimjamException {
 		if (n < 0) {
 			throw new JimjamException("Reminder days should not be negative");
