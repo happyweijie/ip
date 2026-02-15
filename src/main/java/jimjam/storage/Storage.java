@@ -1,6 +1,6 @@
 package jimjam.storage;
 
-import jimjam.parser.Parser;
+import jimjam.logic.Parser;
 import jimjam.task.Task;
 
 import java.io.File;
