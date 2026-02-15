@@ -1,3 +1,4 @@
+/* Used Gemini to get suggestions colors for warm peach UI as well as UI improvements */
 .root {
     main-color: #FFF5E1;      /* Create a looked-up color called "main-color" within root. */
     -fx-background-color: main-color;
