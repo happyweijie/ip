@@ -1,7 +1,7 @@
 package jimjam.task;
 
 import jimjam.exception.JimjamException;
-import jimjam.parser.Parser;
+import jimjam.logic.Parser;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

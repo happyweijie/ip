@@ -1,4 +1,4 @@
-package jimjam.parser;
+package jimjam.logic;
 
 import java.time.LocalDate;
 

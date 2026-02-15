@@ -8,8 +8,8 @@ import jimjam.storage.Storage;
 import jimjam.task.Task;
 import jimjam.task.TaskList;
 
-import jimjam.ui.Command;
-import jimjam.ui.Ui;
+import jimjam.logic.Command;
+import jimjam.logic.Ui;
 
 /**
  * The main entry point for the Jimjam task management application.
