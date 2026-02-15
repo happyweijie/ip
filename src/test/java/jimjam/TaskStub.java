@@ -6,9 +6,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class TaskStub extends Task {
-	public TaskStub(String description) {
-		super(description);
-	}
+    public TaskStub(String description) {
+	    super(description);
+    }
 
 	public TaskStub(String description, boolean isDone) {
 		super(description, isDone);
