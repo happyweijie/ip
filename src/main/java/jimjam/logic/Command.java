@@ -26,9 +26,9 @@ public enum Command {
     /** Search for tasks containing a query as substring */
     FIND,
     /** Search for upcoming tasks */
-    REMIND;
-
-
+    REMIND,
+    /** Easter Egg: Profess love for monads */
+    MONAD;
 
     /**
      * Translates a string input into a Command.

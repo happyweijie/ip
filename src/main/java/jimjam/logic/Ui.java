@@ -134,4 +134,14 @@ public class Ui {
 		return "OK, I've marked this task as not done yet:\n" +
 				task;
 	}
+
+	/**
+	 * Returns a String message professing appreciation for monads.
+	 *
+	 * @return The message about monads.
+	 */
+	public String monadMessage() {
+		return "I \u2661 monads too!!\n" + // Uses Unicode hollow heart
+				"Did you know that monads are monoids in the category of endofunctors?";
+	}
 }
