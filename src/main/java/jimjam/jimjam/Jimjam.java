@@ -78,6 +78,8 @@ public class Jimjam {
 
         case REMIND -> this.handleRemind(args);
 
+        case MONAD -> this.handleMonad();
+
         default -> throw new JimjamException("I don't recognise this command.");
         };
     }
@@ -120,6 +122,10 @@ public class Jimjam {
     private String handleRemind(String args) throws JimjamException {
         TaskList reminders = taskList.getTasksDueWithin(args);
         return ui.remindersMessage(reminders);
+    }
+
+    private String handleMonad() throws JimjamException {
+        return ui.monadMessage();
     }
 
     /**
