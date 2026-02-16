@@ -6,9 +6,9 @@ import jimjam.task.TaskList;
 import java.util.List;
 
 /**
- * Handles the user interface of the Jimjam application.
- * This class is responsible for interacting with the user by printing
- * messages, task lists, and operation confirmations to the standard output.
+ * Generates string-based responses for the Jimjam application.
+ * This class is responsible for interacting with the user through
+ * user-friendly messages and displaying Task related information.
  */
 public class Ui {
 
