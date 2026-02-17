@@ -98,7 +98,8 @@ public class Ui {
 	 */
 	public String addTaskMessage(Task task, int size) {
 		return "Got it. I've added:\n" + task + "\n" +
-				"Now you have " + size + " tasks.";
+				"Now you have " + size + " task" +
+				(size == 1 ? "" : "s") + ".";
 	}
 
 	/**
