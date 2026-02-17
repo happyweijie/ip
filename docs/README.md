@@ -157,4 +157,3 @@ Bye. Hope to see you again soon!
 | **Find**         | `find <keyword>`  <br> e.g., `find song`                                                                                  |
 | **Remind**       | `remind <days>`  <br> e.g., `remind 7`                                                                                    |
 | **Exit**         | `bye`                                                                                                                     |
-|
