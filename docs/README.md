@@ -14,7 +14,7 @@ Jimjam is a helpful chatbot tool that frees your mind of having to remember thin
 
 ## Quick Start
 1.  Ensure you have **Java 17** or above spinning on your machine.
-2.  Download the latest `jimjam.jar` from our [releases page](https://github.com/jimjam-user/ip/releases).
+2.  Download the latest `jimjam.jar` from our [releases page](https://github.com/happyweijie/ip/releases).
 3.  Open your terminal or double-click the jar to start the session.
 4.  Type your command in the input bar and hit Enter. Jimjam will handle the rest.
 
