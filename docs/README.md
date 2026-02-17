@@ -19,7 +19,7 @@ Jimjam is a helpful chatbot tool that frees your mind of having to remember thin
 4.  Type your command in the input bar and hit Enter. Jimjam will handle the rest.
 
 ## Features
-> **Note:** Parameters in `<angle_brackets>` are mandatory.
+> **Note:** Parameters in `<angle_brackets>` are mandatory. Parameters in `[square_brackets]` are optional.
 
 ### Adding Tasks
 
@@ -70,9 +70,52 @@ Displays all tasks currently stored in your list.
 
 **Expected Output:**
 ```
-Here are the tasks in your list:
 1: [T][ ] Write song
 2: [D][ ] Submit demo tape (by: May 20 2026)
-3: E][ ] Jam Session (from: Jun 12 2026 to: Jun 12 2026)
+3: [E][ ] Jam Session (from: Jun 12 2026 to: Jun 12 2026)
 ```
 
+#### 5. Mark as Done (`mark`)
+Marks a specific task as completed.
+* **Format:** `mark <index>`
+* **Example:** `mark 2`
+
+**Expected Output:**
+```
+Nice! I've marked this task as done:
+[D][X] Submit demo tape (by: May 20 2026)
+```
+
+#### 6. Mark as Not Done (`unmark`)
+Marks a specific task as completed.
+* **Format:** `unmark <index>`
+* **Example:** `unmark 2`
+
+**Expected Output:**
+```
+OK, I've marked this task as not done yet:
+[D][ ] Submit demo tape (by: May 20 2026)
+```
+
+#### 7. Delete (`delete`)
+Permanently removes a task from your list using its index number.
+* **Format:** `delete <index>`
+* **Example:** `delete 2`
+
+**Expected Output:**
+```
+Got it. I've removed:
+[D][ ] Submit demo tape (by: May 20 2026)
+Now you have 2 tasks.
+```
+
+#### 8. Find (`find`)
+Searches for tasks that contain a specific keyword in their description.
+* **Format:** `find [keyword]`
+* **Example:** `find song`
+
+**Expected Output:**
+```
+Here are the matching tasks in your list:
+1: [T][ ] Write song
+```
