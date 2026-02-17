@@ -58,7 +58,7 @@ For the tasks that span a specific timeframe.
 ```
 Got it. I've added:
 [E][ ] Jam Session (from: Jun 12 2026 to: Jun 12 2026)
-Now you have 2 tasks.
+Now you have 3 tasks.
 ```
 
 ### Managing Tasks
