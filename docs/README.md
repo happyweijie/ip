@@ -8,8 +8,8 @@ Jimjam is a helpful chatbot tool that frees your mind of having to remember thin
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [Adding Tasks](#adding-tasks)
-    * [Managing Tasks](#tuning-your-list)
-    * [Digging for Data](#digging-for-data)
+    * [Managing Tasks](#managing-tasks)
+    * [Exiting the App](#exiting-the-app)
 * [Command Summary](#command-summary)
 
 ## Quick Start
@@ -119,3 +119,28 @@ Searches for tasks that contain a specific keyword in their description.
 Here are the matching tasks in your list:
 1: [T][ ] Write song
 ```
+
+#### 9. Remind (`remind`)
+Displays all tasks occurring within the next `n` days.
+* **Format:** `remind <n>`
+* **Example:** `remind 2`
+
+**Expected Output:**
+```
+Here are your reminders:
+1: [D][ ] Submit demo tape (by: May 20 2026)
+```
+
+### Exiting the App
+
+#### 10. Exit (`bye`)
+Closes the application. Your data is automatically saved before the session ends.
+* **Format:** `bye`
+* **Example:** `bye`
+
+**Expected Output:**
+```
+Bye. Hope to see you again soon!
+```
+
+## Command Summary
