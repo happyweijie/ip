@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     private Jimjam jimjam;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/jimjam.jpg"));
+    private Image jimjamImage = new Image(this.getClass().getResourceAsStream("/images/jimjam.jpg"));
 
     @FXML
     public void initialize() {
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
         // Add welcome message
         String welcome = jimjam.getWelcomeMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getJimjamDialog(welcome, dukeImage)
+                DialogBox.getJimjamDialog(welcome, jimjamImage)
         );
     }
 
@@ -66,13 +66,13 @@ public class MainWindow extends AnchorPane {
             response = jimjam.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getJimjamDialog(response, dukeImage)
+                    DialogBox.getJimjamDialog(response, jimjamImage)
             );
         } catch (ExitException e) {
             // Exit program if the user types bye
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getJimjamDialog(e.getMessage(), dukeImage)
+                    DialogBox.getJimjamDialog(e.getMessage(), jimjamImage)
             );
 
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
@@ -82,7 +82,7 @@ public class MainWindow extends AnchorPane {
             response = "Error: " + e.getMessage();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getJimjamDialog(response, dukeImage)
+                    DialogBox.getJimjamDialog(response, jimjamImage)
             );
         }
         userInput.clear();
