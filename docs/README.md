@@ -8,7 +8,7 @@ Jimjam is a helpful chatbot tool that frees your mind of having to remember thin
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [Adding Tasks](#adding-tasks)
-    * [Tuning Your List](#tuning-your-list)
+    * [Managing Tasks](#tuning-your-list)
     * [Digging for Data](#digging-for-data)
 * [Command Summary](#command-summary)
 
@@ -61,18 +61,18 @@ Got it. I've added:
 Now you have 2 tasks.
 ```
 
+### Managing Tasks
 
-// A description of the expected outcome goes here
+#### 4. List (`list`)
+Displays all tasks currently stored in your list.
+* **Format:** `list`
+* **Example:** `list`
 
+**Expected Output:**
 ```
-expected output
+Here are the tasks in your list:
+1: [T][ ] Write song
+2: [D][ ] Submit demo tape (by: May 20 2026)
+3: E][ ] Jam Session (from: Jun 12 2026 to: Jun 12 2026)
 ```
 
-## Feature ABC
-
-// Feature details
-
-
-## Feature XYZ
-
-// Feature details
