@@ -123,7 +123,7 @@ Here are the matching tasks in your list:
 #### 9. Remind (`remind`)
 Displays all tasks occurring within the next `n` days.
 * **Format:** `remind <n>`
-* **Example:** `remind 2`
+* **Example:** `remind 7`
 
 **Expected Output:**
 ```
@@ -144,3 +144,16 @@ Bye. Hope to see you again soon!
 ```
 
 ## Command Summary
+| Action        | Format, Examples                                                                                                |
+|---------------|-----------------------------------------------------------------------------------------------------------------|
+| **Add Todo**  | `todo <description>`  <br> e.g., `todo Write song`                                                              |
+| **Add Deadline** | `deadline <description> /by <yyyy-MM-dd>`  <br> e.g., `deadline Submit demo tape /by 2026-05-20`                |
+| **Add Event** | `event <description> /from <yyyy-MM-dd> /to <yyyy-MM-dd>`  <br> e.g., `event Jam Session /from 2026-06-12 /to 2026-06-12` |
+| **List** | `list`                                                                                                          |
+| **Mark** | `mark <index>`  <br> e.g., `mark 1`                                                                             |
+| **Unmark** | `unmark <index>`  <br> e.g., `unmark 1`                                                                         |
+| **Delete** | `delete <index>`  <br> e.g., `delete 3`                                                                         |
+| **Find** | `find <keyword>`  <br> e.g., `find song`                                                                        |
+| **Remind** | `remind <days>`  <br> e.g., `remind 7`                                                                          |
+| **Exit** | `bye`
+|
