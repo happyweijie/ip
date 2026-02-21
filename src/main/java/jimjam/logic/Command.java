@@ -29,6 +29,8 @@ public enum Command {
     REMIND,
     /** Help */
     HELP,
+    /** Help */
+    AI_HELP,
     /** Easter Egg: Profess love for monads */
     MONAD;
 

@@ -81,7 +81,7 @@ public class Jimjam {
 
         case REMIND -> this.handleRemind(args);
 
-        case HELP -> this.handleHelp(args);
+        case HELP -> this.handleHelp();
 
         case MONAD -> this.handleMonad();
 
@@ -129,7 +129,7 @@ public class Jimjam {
         return ui.remindersMessage(reminders);
     }
 
-    private String handleHelp(String args) {
+    private String handleHelp() {
         return ui.helpMessage();
     }
 
