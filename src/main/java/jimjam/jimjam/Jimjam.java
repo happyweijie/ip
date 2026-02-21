@@ -1,5 +1,6 @@
 package jimjam.jimjam;
 
+import jimjam.ai.AiHelper;
 import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
 
@@ -23,6 +24,7 @@ public class Jimjam {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+    private final AiHelper aiHelper;
 
     /**
      * Initializes the Jimjam application components.
@@ -32,6 +34,7 @@ public class Jimjam {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
         this.taskList = new TaskList(storage.load());
+        this.aiHelper = new AiHelper();
 
         assert this.taskList.getSize() >= 0 : "list size cannot be negative.";
     }
