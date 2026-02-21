@@ -85,10 +85,24 @@ public class Jimjam {
 
             case AI_HELP -> this.handleAiHelp(args);
 
+            case AI_COMMAND -> this.handleAiCommand(args);
+
             case MONAD -> this.handleMonad();
 
             default -> throw new JimjamException("I don't recognise this command.");
         };
+    }
+
+    private String handleAiCommand(String userPrompt) throws JimjamException {
+        String systemPrompt = "You are an assistant for a CLI task management app. Based on the user's request, generate a valid command that the app understands.\n"
+                + "Only respond with the command, nothing else.\n\n"
+                + "Available commands:\n"
+                + ui.helpMessage();
+
+        String command = aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
+        System.out.println("Ai command: " + command);
+
+        return this.getResponse(command);
     }
 
     private String handleMark(String args) throws JimjamException {
