@@ -61,31 +61,33 @@ public class Jimjam {
     private String executeCommand(Command command, String args)
             throws JimjamException {
         return switch (command) {
-        case BYE -> throw new ExitException(this.ui.goodbyeMessage());
+            case BYE -> throw new ExitException(this.ui.goodbyeMessage());
 
-        case LIST -> this.ui.taskListMessage(this.taskList);
+            case LIST -> this.ui.taskListMessage(this.taskList);
 
-        case MARK -> this.handleMark(args);
+            case MARK -> this.handleMark(args);
 
-        case UNMARK -> this.handleUnmark(args);
+            case UNMARK -> this.handleUnmark(args);
 
-        case TODO -> this.handleTodo(args);
+            case TODO -> this.handleTodo(args);
 
-        case DEADLINE -> this.handleDeadline(args);
+            case DEADLINE -> this.handleDeadline(args);
 
-        case EVENT -> this.handleEvent(args);
+            case EVENT -> this.handleEvent(args);
 
-        case DELETE -> this.handleDelete(args);
+            case DELETE -> this.handleDelete(args);
 
-        case FIND -> this.handleFind(args);
+            case FIND -> this.handleFind(args);
 
-        case REMIND -> this.handleRemind(args);
+            case REMIND -> this.handleRemind(args);
 
-        case HELP -> this.handleHelp();
+            case HELP -> this.handleHelp();
 
-        case MONAD -> this.handleMonad();
+            case AI_HELP -> this.handleAiHelp(args);
 
-        default -> throw new JimjamException("I don't recognise this command.");
+            case MONAD -> this.handleMonad();
+
+            default -> throw new JimjamException("I don't recognise this command.");
         };
     }
 
@@ -131,6 +133,19 @@ public class Jimjam {
 
     private String handleHelp() {
         return ui.helpMessage();
+    }
+
+    private String handleAiHelp(String userPrompt) throws JimjamException {
+        if (userPrompt.isBlank()) {
+            throw new  JimjamException("Please specify what you would like to ask.");
+        }
+
+        String systemPrompt = "You are helping users of a CLI app. "
+                + "Answer the user's query about the features of the app, based on the app's commands given below. "
+                + "Limit your answer to one sentence.\n\n"
+                + ui.helpMessage();
+
+        return aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
     }
 
     private String handleMonad() throws JimjamException {
