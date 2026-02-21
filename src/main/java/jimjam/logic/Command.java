@@ -27,6 +27,8 @@ public enum Command {
     FIND,
     /** Search for upcoming tasks */
     REMIND,
+    /** Help */
+    HELP,
     /** Easter Egg: Profess love for monads */
     MONAD;
 
