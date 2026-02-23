@@ -30,9 +30,7 @@ public enum Command {
     /** Help */
     HELP,
     /** AI Help */
-    AI_HELP,
-    /** AI_COMMAND */
-    AI_COMMAND,
+    AI,
     /** Easter Egg: Profess love for monads */
     MONAD;
 

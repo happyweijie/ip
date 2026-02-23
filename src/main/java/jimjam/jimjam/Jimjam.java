@@ -83,9 +83,7 @@ public class Jimjam {
 
             case HELP -> this.handleHelp();
 
-            case AI_HELP -> this.handleAiHelp(args);
-
-            case AI_COMMAND -> this.handleAiCommand(args);
+            case AI ->  this.handleAi(args);
 
             case MONAD -> this.handleMonad();
 
@@ -137,30 +135,44 @@ public class Jimjam {
         return ui.helpMessage();
     }
 
-    private String handleAiHelp(String userPrompt) throws JimjamException {
+    private String handleAi(String userPrompt) throws JimjamException {
         if (userPrompt.isBlank()) {
-            throw new  JimjamException("Please specify what you would like to ask.");
+            throw new JimjamException("Please specify what you would like to ask.");
         }
 
-        String systemPrompt = "You are helping users of a CLI app. "
-                + "Answer the user's query about the features of the app, based on the app's commands given below. "
-                + "Limit your answer to one sentence.\n\n"
-                + ui.helpMessage();
-
-        return aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
-    }
-
-    private String handleAiCommand(String userPrompt) throws JimjamException {
-        String systemPrompt = "You are an assistant for a CLI task management app. "
-                + "Based on the user's request, generate a valid command that the app understands.\n"
-                + "Only respond with the command, nothing else.\n\n"
+        String systemPrompt =
+                "You are an assistant for a CLI task management app.\n"
+                + "Decide whether the user wants:\n"
+                + "1) HELP — explanation of how to use the commands in the app\n"
+                + "2) COMMAND — generate a valid command the app understands\n\n"
+                + "Rules:\n"
+                + "- If the user asks how something works, reply:\n"
+                + "  HELP: <one sentence>\n"
+                + "- If the user wants the app to do something, reply:\n"
+                + "  COMMAND: <command only>\n"
+                + "- Do NOT output anything else.\n\n"
                 + "Available commands:\n"
                 + ui.helpMessage();
 
-        String command = aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
-        System.out.println("Ai command: " + command);
+        String aiOutput = aiHelper
+                .getAiResponse(systemPrompt, userPrompt)
+                .aiMessage()
+                .text()
+                .trim();
 
-        return this.getResponse(command);
+        // Route based on prefix
+        if (aiOutput.startsWith("COMMAND:")) {
+            String command = aiOutput.substring(8).trim();
+            System.out.println("Ai command: " + command);
+            return this.getResponse(command);
+        }
+
+        if (aiOutput.startsWith("HELP:")) {
+            return aiOutput.substring(5).trim();
+        }
+
+        // fallback if AI messes up
+        return aiOutput;
     }
 
     private String handleMonad() throws JimjamException {
