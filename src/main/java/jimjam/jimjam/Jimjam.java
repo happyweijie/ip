@@ -151,7 +151,8 @@ public class Jimjam {
     }
 
     private String handleAiCommand(String userPrompt) throws JimjamException {
-        String systemPrompt = "You are an assistant for a CLI task management app. Based on the user's request, generate a valid command that the app understands.\n"
+        String systemPrompt = "You are an assistant for a CLI task management app. "
+                + "Based on the user's request, generate a valid command that the app understands.\n"
                 + "Only respond with the command, nothing else.\n\n"
                 + "Available commands:\n"
                 + ui.helpMessage();
