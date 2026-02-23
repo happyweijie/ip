@@ -93,18 +93,6 @@ public class Jimjam {
         };
     }
 
-    private String handleAiCommand(String userPrompt) throws JimjamException {
-        String systemPrompt = "You are an assistant for a CLI task management app. Based on the user's request, generate a valid command that the app understands.\n"
-                + "Only respond with the command, nothing else.\n\n"
-                + "Available commands:\n"
-                + ui.helpMessage();
-
-        String command = aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
-        System.out.println("Ai command: " + command);
-
-        return this.getResponse(command);
-    }
-
     private String handleMark(String args) throws JimjamException {
         Task marked = this.taskList.updateTaskStatus(args, true);
         return this.ui.markedTaskMessage(marked);
@@ -160,6 +148,18 @@ public class Jimjam {
                 + ui.helpMessage();
 
         return aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
+    }
+
+    private String handleAiCommand(String userPrompt) throws JimjamException {
+        String systemPrompt = "You are an assistant for a CLI task management app. Based on the user's request, generate a valid command that the app understands.\n"
+                + "Only respond with the command, nothing else.\n\n"
+                + "Available commands:\n"
+                + ui.helpMessage();
+
+        String command = aiHelper.getAiResponse(systemPrompt, userPrompt).aiMessage().text();
+        System.out.println("Ai command: " + command);
+
+        return this.getResponse(command);
     }
 
     private String handleMonad() throws JimjamException {
