@@ -137,6 +137,26 @@ public class Ui {
     }
 
     /**
+     * Returns a String message on using the different commands.
+     *
+     * @return The message on using the different commands.
+     */
+    public String helpMessage() {
+        return """
+                1. todo <description> - Adds a todo task.
+                2. deadline <description> /by <yyyy-MM-dd> - Adds a task with a deadline.
+                3. event <description> /from <yyyy-MM-dd> /to <yyyy-MM-dd> - Adds an event task.
+                4. list - Lists all tasks.
+                5. mark <index> - Marks a task as done.
+                6. unmark <index> - Marks a task as not done.
+                7. delete <index> - Deletes a task.
+                8. find <keyword> - Finds tasks containing a keyword.
+                9. remind <days> - Shows tasks due within the given number of days.
+                10. help - Shows instructions for using Jimjam.
+                """;
+    }
+
+    /**
      * Returns a String message professing appreciation for monads.
      *
      * @return The message about monads.

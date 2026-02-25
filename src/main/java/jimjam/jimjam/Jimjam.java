@@ -1,5 +1,6 @@
 package jimjam.jimjam;
 
+import jimjam.ai.AiHelper;
 import jimjam.exception.ExitException;
 import jimjam.exception.JimjamException;
 
@@ -23,6 +24,7 @@ public class Jimjam {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+    private final AiHelper aiHelper;
 
     /**
      * Initializes the Jimjam application components.
@@ -32,6 +34,7 @@ public class Jimjam {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_STORAGE_PATH);
         this.taskList = new TaskList(storage.load());
+        this.aiHelper = new AiHelper();
 
         assert this.taskList.getSize() >= 0 : "list size cannot be negative.";
     }
@@ -58,29 +61,33 @@ public class Jimjam {
     private String executeCommand(Command command, String args)
             throws JimjamException {
         return switch (command) {
-        case BYE -> throw new ExitException(this.ui.goodbyeMessage());
+            case BYE -> throw new ExitException(this.ui.goodbyeMessage());
 
-        case LIST -> this.ui.taskListMessage(this.taskList);
+            case LIST -> this.ui.taskListMessage(this.taskList);
 
-        case MARK -> this.handleMark(args);
+            case MARK -> this.handleMark(args);
 
-        case UNMARK -> this.handleUnmark(args);
+            case UNMARK -> this.handleUnmark(args);
 
-        case TODO -> this.handleTodo(args);
+            case TODO -> this.handleTodo(args);
 
-        case DEADLINE -> this.handleDeadline(args);
+            case DEADLINE -> this.handleDeadline(args);
 
-        case EVENT -> this.handleEvent(args);
+            case EVENT -> this.handleEvent(args);
 
-        case DELETE -> this.handleDelete(args);
+            case DELETE -> this.handleDelete(args);
 
-        case FIND -> this.handleFind(args);
+            case FIND -> this.handleFind(args);
 
-        case REMIND -> this.handleRemind(args);
+            case REMIND -> this.handleRemind(args);
 
-        case MONAD -> this.handleMonad();
+            case HELP -> this.handleHelp();
 
-        default -> throw new JimjamException("I don't recognise this command.");
+            case AI ->  this.handleAi(args);
+
+            case MONAD -> this.handleMonad();
+
+            default -> throw new JimjamException("I don't recognise this command.");
         };
     }
 
@@ -122,6 +129,51 @@ public class Jimjam {
     private String handleRemind(String args) throws JimjamException {
         TaskList reminders = taskList.getTasksDueWithin(args);
         return ui.remindersMessage(reminders);
+    }
+
+    private String handleHelp() {
+        return ui.helpMessage();
+    }
+
+    private String handleAi(String userPrompt) throws JimjamException {
+        if (userPrompt.isBlank()) {
+            throw new JimjamException("Please specify what you would like to ask.");
+        }
+
+        String systemPrompt =
+                "You are an assistant for a CLI task management app.\n"
+                + "Decide whether the user wants:\n"
+                + "1) HELP — explanation of how to use the commands in the app\n"
+                + "2) COMMAND — generate a valid command the app understands\n\n"
+                + "Rules:\n"
+                + "- If the user asks how something works, reply:\n"
+                + "  HELP: <one sentence>\n"
+                + "- If the user wants the app to do something, reply:\n"
+                + "  COMMAND: <command only>\n"
+                + "- For words like 'tomorrow', 'next monday', use today's date as the reference date\n"
+                + "- Do NOT output anything else.\n\n"
+                + "Available commands:\n"
+                + ui.helpMessage();
+
+        String aiOutput = aiHelper
+                .getAiResponse(systemPrompt, userPrompt)
+                .aiMessage()
+                .text()
+                .trim();
+
+        // Route based on prefix
+        if (aiOutput.startsWith("COMMAND:")) {
+            String command = aiOutput.substring(8).trim();
+            System.out.println("Ai command: " + command);
+            return this.getResponse(command);
+        }
+
+        if (aiOutput.startsWith("HELP:")) {
+            return aiOutput.substring(5).trim();
+        }
+
+        // fallback if AI messes up
+        return aiOutput;
     }
 
     private String handleMonad() throws JimjamException {
