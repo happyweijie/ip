@@ -150,6 +150,7 @@ public class Jimjam {
                 + "  HELP: <one sentence>\n"
                 + "- If the user wants the app to do something, reply:\n"
                 + "  COMMAND: <command only>\n"
+                + "- For words like 'tomorrow', 'next monday', use today's date as the reference date\n"
                 + "- Do NOT output anything else.\n\n"
                 + "Available commands:\n"
                 + ui.helpMessage();
